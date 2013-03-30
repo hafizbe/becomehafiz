@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="185cf115-d9f5-4d55-894b-7a02ac21dd07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hafiz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -10,6 +11,7 @@
     <file path="/user.rb" changelist="185cf115-d9f5-4d55-894b-7a02ac21dd07" time="1364594694003" ignored="false" />
     <file path="/Ruby Console" changelist="185cf115-d9f5-4d55-894b-7a02ac21dd07" time="1364599460132" ignored="false" />
     <file path="/Dummy.txt" changelist="185cf115-d9f5-4d55-894b-7a02ac21dd07" time="1364676289890" ignored="false" />
+    <file path="/Gemfile" changelist="185cf115-d9f5-4d55-894b-7a02ac21dd07" time="1364678034176" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,10 +64,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/application.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="50" selection-start="2851" selection-end="2851" vertical-scroll-proportion="0.8641656">
+            <state line="61" column="50" selection-start="2851" selection-end="2851" vertical-scroll-proportion="-25.692308">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Gemfile" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Gemfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="24" column="9" selection-start="530" selection-end="530" vertical-scroll-proportion="0.4505632">
               <folding />
             </state>
           </provider>
@@ -98,13 +109,13 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/initializers/devise.rb" />
         <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/db/migrate/20130329214402_devise_create_users.rb" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
         <option value="$PROJECT_DIR$/config/database.yml" />
         <option value="$PROJECT_DIR$/config/application.rb" />
+        <option value="$PROJECT_DIR$/Gemfile" />
       </list>
     </option>
   </component>
@@ -669,13 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="12" selection-start="167" selection-end="167" vertical-scroll-proportion="0.1589404">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20130329214402_devise_create_users.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="60" selection-start="1264" selection-end="1264" vertical-scroll-proportion="0.0">
@@ -713,7 +717,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="50" selection-start="2851" selection-end="2851" vertical-scroll-proportion="0.8641656">
+        <state line="61" column="50" selection-start="2851" selection-end="2851" vertical-scroll-proportion="-25.692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="9" selection-start="530" selection-end="530" vertical-scroll-proportion="0.4505632">
           <folding />
         </state>
       </provider>
