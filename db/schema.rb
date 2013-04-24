@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130329214402) do
+ActiveRecord::Schema.define(:version => 20130421205233) do
+
+  create_table "books", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "surahs", :force => true do |t|
+    t.string   "name"
+    t.integer  "surahId"
+    t.integer  "ayahId"
+    t.text     "ayahText"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  surahId: 1
+  ayahId: 1
+  ayahText: MyText
+
+two:
+  name: MyString
+  surahId: 1
+  ayahId: 1
+  ayahText: MyText

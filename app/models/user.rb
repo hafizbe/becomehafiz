@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name
   # attr_accessible :title, :body
 
-  before_save :ensure_authentication_token
+  before_save :reset_authentication_token
 
   def skip_confirmation!
     self.confirmed_at = Time.now
