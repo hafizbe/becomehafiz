@@ -1,0 +1,14 @@
+#surah_container{
+
+}
+
+#surah_container .verset{
+    cursor: default;
+}
+
+#surah_wrapper{
+    direction: rtl;
+    font-size: 25px;
+    line-height: 50px;
+    font-family: PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
+}

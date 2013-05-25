@@ -8,6 +8,8 @@ gem 'rails', '3.2.12'
 gem 'mysql2'
 gem 'devise'
 gem 'haml'
+gem 'aws-sdk'
+gem 'soundmanager-rails'
 
 
 # Gems used only for assets and not required
@@ -28,6 +30,13 @@ end
 
 group :production do
   gem 'pg'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
 end
 
 gem 'jquery-rails'

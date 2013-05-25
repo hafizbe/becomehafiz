@@ -29,8 +29,17 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    aws-sdk (1.9.3)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.0.1)
+    better_errors (0.3.2)
+      coderay (>= 1.0.0)
+      erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     builder (3.0.4)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -66,15 +75,21 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_request (0.2.1)
+      rack-contrib
+      rails
     mime-types (1.21)
     multi_json (1.7.2)
     mysql2 (0.3.11)
+    nokogiri (1.5.9)
     orm_adapter (0.4.0)
     pg (0.15.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-contrib (1.1.0)
+      rack (>= 0.9.1)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -102,6 +117,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    soundmanager-rails (0.1.4)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -122,6 +138,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    uuidtools (2.1.4)
     warden (1.2.1)
       rack (>= 1.0)
 
@@ -129,15 +146,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk
+  better_errors
+  binding_of_caller
   coffee-rails (~> 3.2.1)
   devise
   haml
   jquery-rails
   less-rails
+  meta_request
   mysql2
   pg
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
+  soundmanager-rails
   therubyracer (~> 0.10.2)
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

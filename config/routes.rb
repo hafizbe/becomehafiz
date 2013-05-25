@@ -1,8 +1,14 @@
 Hafiz::Application.routes.draw do
+  resources :recitators
+
+
   resources :books
 
-
+  get "surahs" => "surahs#index"
+  post "surahs" => "surahs#index"
   get "pages/home"
+
+  #get "surahs/index"
 
   devise_for :users
 
