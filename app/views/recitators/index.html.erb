@@ -1,0 +1,25 @@
+<h1>Listing recitators</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recitators.each do |recitator| %>
+  <tr>
+    <td><%= recitator.name %></td>
+    <td><%= recitator.value %></td>
+    <td><%= link_to 'Show', recitator %></td>
+    <td><%= link_to 'Edit', edit_recitator_path(recitator) %></td>
+    <td><%= link_to 'Destroy', recitator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recitator', new_recitator_path %>
