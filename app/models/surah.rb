@@ -1,9 +1,9 @@
 class Surah < ActiveRecord::Base
-  attr_accessible :ayahId, :ayahText, :name, :surahId
+  attr_accessible :ayahId, :ayahText, :name, :surah_id
 
   #Retourne les versets en fonctions de l'id de la sourate donnée en paramètre
   def self.getAyahs(surah_id)
-    tab = Surah.where(:surahId => surah_id).order('ayahId')
+    tab = Surah.where(:surah_id => surah_id).order('ayah_id')
     retour = []
 
     tab.each do |ayah|
@@ -17,10 +17,10 @@ class Surah < ActiveRecord::Base
   def self.getNameSurah
     cpt = 1.to_i
 
-    tab = Surah.select('name, surahId').group('name, surahId').order('surahId')
+    tab = Surah.select('name, surah_id').group('name, surah_id').order('surah_id')
     retour = Hash.new
     tab.each do |surah|
-      retour[surah.surahId] = surah.name
+      retour[surah.surah_id] = surah.name
       cpt = cpt + 1
     end
     retour

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520184142) do
+ActiveRecord::Schema.define(:version => 20130526210141) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20130520184142) do
 
   create_table "surahs", :force => true do |t|
     t.string   "name"
-    t.integer  "surahId"
-    t.integer  "ayahId"
+    t.integer  "surah_id"
+    t.integer  "ayah_id"
     t.text     "ayahText"
     t.datetime "created_at"
     t.datetime "updated_at"
