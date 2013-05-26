@@ -3,7 +3,7 @@ class Surah < ActiveRecord::Base
 
   #Retourne les versets en fonctions de l'id de la sourate donnée en paramètre
   def self.getAyahs(surah_id)
-    tab = Surah.where(:surahId => surah_id).order("ayahId")
+    tab = Surah.where(:surahId => surah_id).order('ayahId')
     retour = []
 
     tab.each do |ayah|
@@ -17,7 +17,7 @@ class Surah < ActiveRecord::Base
   def self.getNameSurah
     cpt = 1.to_i
 
-    tab = Surah.select("name, surahId").group("name, surahId").order("surahId")
+    tab = Surah.select('name, surahId').group('name, surahId').order('surahId')
     retour = Hash.new
     tab.each do |surah|
       retour[surah.surahId] = surah.name
