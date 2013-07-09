@@ -63,7 +63,7 @@ Hafiz::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   #
-    root :to => 'pages#home'
+    root :to => 'surahs#index'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
@@ -71,6 +71,7 @@ Hafiz::Application.routes.draw do
   # match ':controller(/:action(/
   namespace :api do
     namespace :v1 do
+      get "get_url_amazon" => "amazon#get_url"
       devise_scope :user do
         post 'sessions' => 'sessions#create', :as => 'login'
         delete 'sessions' => 'sessions#destroy', :as => 'logout'
