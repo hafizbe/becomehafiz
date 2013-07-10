@@ -34,6 +34,7 @@ play_fichier = (url_fichier, a, fichier_temp, nb_fichier, num_sourate, recitateu
      if (fichier_temp + 1) <= nb_fichier
        url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
        play_fichier url_fichier[0],convertSourate(fichier_temp + 1),fichier_temp + 1, nb_fichier, num_sourate, recitateur
+     return
   })
 
   return
