@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="185cf115-d9f5-4d55-894b-7a02ac21dd07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/bootstrap_and_overrides.css.less" afterPath="$PROJECT_DIR$/app/assets/stylesheets/bootstrap_and_overrides.css.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hafiz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,7 +78,7 @@
       <file leaf-file-name="bootstrap_and_overrides.css.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/bootstrap_and_overrides.css.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="77" selection-start="853" selection-end="853" vertical-scroll-proportion="0.41311476">
+            <state line="17" column="34" selection-start="905" selection-end="905" vertical-scroll-proportion="0.50163937">
               <folding />
             </state>
           </provider>
@@ -905,7 +903,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/bootstrap_and_overrides.css.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="77" selection-start="853" selection-end="853" vertical-scroll-proportion="0.41311476">
+        <state line="17" column="34" selection-start="905" selection-end="905" vertical-scroll-proportion="0.50163937">
           <folding />
         </state>
       </provider>
