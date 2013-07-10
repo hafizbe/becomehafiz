@@ -11,6 +11,7 @@ gem 'haml'
 gem 'aws-sdk'
 gem 'soundmanager-rails'
 #gem 'soundmanager2-rails'
+gem 'twitter-bootstrap-rails'
 
 
 
@@ -23,7 +24,6 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-gem 'twitter-bootstrap-rails'
    gem 'therubyracer', '~> 0.10.2'
   gem 'less-rails'
   
