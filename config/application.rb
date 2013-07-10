@@ -62,8 +62,6 @@ module Hafiz
 
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile += %w(soundmanager2.swf soundmanager2_flash9.swf)
-
     BUCKET = 'becomehafiz'
   end
 end
