@@ -20,22 +20,22 @@ play_fichier = (url_fichier, a, fichier_temp, nb_fichier, num_sourate, recitateu
   s = soundManager.getSoundById a
   if !s
     soundManager.createSound({
-     id: a,
-     url: url_fichier
-    })
+                             id: a,
+                             url: url_fichier
+                             })
   s = soundManager.getSoundById a
   s.play({
-   multiShotEvents: true
-   whileplaying : =>
-     laPosition = s.position
-     console.log laPosition
-     return
-   onfinish : =>
-     if (fichier_temp + 1) <= nb_fichier
-       url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
-       play_fichier url_fichier[0],convertSourate(fichier_temp + 1),fichier_temp + 1, nb_fichier, num_sourate, recitateur
-     return
-  })
+         multiShotEvents: true
+         whileplaying : =>
+           laPosition = s.position
+           console.log laPosition
+           return
+         onfinish : =>
+           if (fichier_temp + 1) <= nb_fichier
+             url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+             play_fichier url_fichier[0],convertSourate(fichier_temp + 1),fichier_temp + 1, nb_fichier, num_sourate, recitateur
+           return
+         })
 
   return
 
@@ -88,24 +88,24 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
   surah = new Array(2)
 
   $.ajax({
-     type: "GET",
-     url: "/api/v1/get_url_amazon?recitator="+recitateur+"&surah="+numSourate+"&num_fichier="+numero_fichier ,
-     dataType: "JSON",
-     async: false,
-     success:  (data) =>
-       surah[0] = data[0].scheme+"://"+data[0].host+data[0].path+"?"+data[0].query
-       surah[1] = data[1].scheme+"://"+data[1].host+data[1].path+"?"+data[1].query
-       return
-     error: =>
-       alert('Error occured');
-  })
+         type: "GET",
+         url: "/api/v1/get_url_amazon?recitator="+recitateur+"&surah="+numSourate+"&num_fichier="+numero_fichier ,
+         dataType: "JSON",
+         async: false,
+         success:  (data) =>
+           surah[0] = data[0].scheme+"://"+data[0].host+data[0].path+"?"+data[0].query
+           surah[1] = data[1].scheme+"://"+data[1].host+data[1].path+"?"+data[1].query
+           return
+         error: =>
+           alert('Error occured');
+         })
   return surah
 
 $(document).ready =>
-    $("#lecteur_play").click =>
-      surah_id = $("#lstSurahs").val();
-      recitator_name = $("#lstRecitators").val();
-      play_sourate(surah_id, recitator_name);
+  $("#lecteur_play").click =>
+    surah_id = $("#lstSurahs").val();
+    recitator_name = $("#lstRecitators").val();
+    play_sourate(surah_id, recitator_name);
 
-      return false
-    return
+    return false
+  return

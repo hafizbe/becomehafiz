@@ -10,6 +10,7 @@ gem 'devise'
 gem 'haml'
 gem 'aws-sdk'
 gem 'soundmanager-rails'
+#gem 'soundmanager2-rails'
 
 
 
