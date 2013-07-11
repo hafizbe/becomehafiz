@@ -1,9 +1,0 @@
-.page-header
-  %h1= "Welcome to Bechome Hafiz !"
-=link_to "Play" ,@surah_mp3.url_for(:read, :secure => true).to_s, :class => "html5", :id => "lecteur_play"
-#surah_container{:class => "row"}
-  -i = 1
-  -@versets.each do |verset|
-    %span{:class => "verset"}=verset.ayahText
-    %span{:class => "break"}  (#{i})
-    -i = i + 1

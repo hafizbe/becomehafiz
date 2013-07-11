@@ -47,7 +47,7 @@ play_sourate = (numSourate, recitateur) =>
   return false
 
 get_nb_fichiers = (num_sourate) =>
-  url_detail  = "https://s3.amazonaws.com/hafizbe/RukuDetail.xml"
+  url_detail  = 'https://s3.amazonaws.com/hafizbe/RukuDetail.xml'
   docXml = loadXMLDOC url_detail
   doc = docXml.getElementsByTagName "marker"
   for i in [0...doc.length]
@@ -88,17 +88,17 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
   surah = new Array(2)
 
   $.ajax({
-         type: "GET",
-         url: "/api/v1/get_url_amazon?recitator="+recitateur+"&surah="+numSourate+"&num_fichier="+numero_fichier ,
-         dataType: "JSON",
-         async: false,
-         success:  (data) =>
-           surah[0] = data[0].scheme+"://"+data[0].host+data[0].path+"?"+data[0].query
-           surah[1] = data[1].scheme+"://"+data[1].host+data[1].path+"?"+data[1].query
-           return
-         error: =>
-           alert('Error occured');
-         })
+   type: "GET",
+   url: "/api/v1/get_url_amazon?recitator="+recitateur+"&surah="+numSourate+"&num_fichier="+numero_fichier ,
+   dataType: "JSON",
+   async: false,
+   success:  (data) =>
+     surah[0] = data[0].scheme+"://"+data[0].host+data[0].path+"?"+data[0].query
+     surah[1] = data[1].scheme+"://"+data[1].host+data[1].path+"?"+data[1].query
+     return
+   error: =>
+     alert('Error occured');
+   })
   return surah
 
 $(document).ready =>

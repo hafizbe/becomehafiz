@@ -4,7 +4,7 @@
 #surah_container{:class => "row"}
   #surah_option_wrapper{:class => "span3"}
     /=link_to "Play" ,@surah_mp3.url_for(:read, :secure => true).to_s, :class => "html5", :id => "lecteur_play"
-    %span#lecteur_play adel
+    %span#lecteur_play Play
     =form_tag("/surahs", :method => "post", :multipart => true, :id => "lstSurahsFrm") do
       %label
         Surahs
