@@ -1,22 +1,28 @@
 .page-header
-  %h1= "Welcome to Bechome Hafiz !"
+  %h1= 'Welcome to Bechome Hafiz !'
 
-#surah_container{:class => "row"}
-  #surah_option_wrapper{:class => "span3"}
-    /=link_to "Play" ,@surah_mp3.url_for(:read, :secure => true).to_s, :class => "html5", :id => "lecteur_play"
+#surah_container{:class => 'row-fluid'}
+  #surah_option_wrapper{:class => 'span2'}
     %span#lecteur_play Play
-    =form_tag("/surahs", :method => "post", :multipart => true, :id => "lstSurahsFrm") do
+    %i{:class => "icon-play"}
+    =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
       %label
         Surahs
-      =select_tag "lstSurahs", options_for_select(@sourates_list.collect {|surah_id, surah_name|[surah_name,surah_id] }, @surah_id)
+      =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_id, surah_name|[surah_name,surah_id] }, @surah_id)
       %label
         Recitators
-      =select_tag "lstRecitators", options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name)
-
-  #surah_wrapper{:class => "span9"}
-    -i = 1
+      =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name)
+      %label
+        From versets
+      =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum)
+      %label
+        To versets
+      =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"])
+      %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
+  #surah_wrapper{:class => 'span10'}
+    -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %span{:class => "verset"}=verset.ayahText
-      %span{:class => "break"}  (#{i})
+      %span{:class => 'verset'}=verset.ayahText
+      %span{:class => 'break'}  (#{i})
       -i = i + 1
 

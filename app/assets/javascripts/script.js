@@ -176,6 +176,14 @@ $(document).ready(function(){
         $("#lstSurahsFrm").submit();
     });
 
+    $('#lstFromVersets').change(function() {
+        $("#lstSurahsFrm").submit();
+    });
+    $('#lstToVersets').change(function() {
+        $("#lstToVersetsCheck").val(1)
+        $("#lstSurahsFrm").submit();
+    });
+
 
     /*$("#lecteur_play").click(function(){
         surah_id = $("#lstSurahs").val();

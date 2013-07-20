@@ -16,6 +16,7 @@ gem 'twitter-bootstrap-rails'
 
 
 
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -24,7 +25,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-   gem 'therubyracer', '~> 0.10.2'
+  gem 'therubyracer', '~> 0.11.0beta1'
   gem 'less-rails'
   
 

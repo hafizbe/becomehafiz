@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20130526210141) do
     t.integer  "surah_id"
     t.integer  "ayah_id"
     t.text     "ayahText"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

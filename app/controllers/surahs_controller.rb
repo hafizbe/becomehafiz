@@ -1,18 +1,42 @@
 class SurahsController < ApplicationController
-  include Amazon
+  #include Amazon
   def index
+    @from_verset_minimum = choose_verset_minimum
+
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
     getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
+
+
+    @from_verset_maximum = choose_verset_maximum @surah_id
 
     @recitator_name = choose_recitator_name # On détermine le recitator
     getNameRecitators # Récupère recitateurs pour la liste déroulante
 
-    initialize_amazon(@recitator_name, @surah_id)
-    @versets = Surah.getAyahs @surah_id
+    @versets = Surah.getAyahs @surah_id,@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
   end
 
 
   protected
+
+  def choose_verset_minimum
+    val = 1
+    unless params[:lstFromVersets].blank?
+      val = params[:lstFromVersets]
+    end
+    val
+  end
+
+  # Retourne hashmap avec le dernier verset ainsi que le dernier verset sélectionné
+  def choose_verset_maximum(id_surah)
+    h = Hash.new()
+    val = Surah.get_last_ayah_from_surah  id_surah
+    h["max"] = val
+    h["max_selected"] = val
+    unless params[:lstToVersets].blank? || params[:lstToVersetsCheck] == 0.to_s
+      h["max_selected"] = params[:lstToVersets]
+    end
+    h
+  end
 
   def choose_surahId
     surah_id = 1
@@ -40,12 +64,6 @@ class SurahsController < ApplicationController
      @mapRecitators[recitator.name] = recitator.value
     end
     @mapRecitators
-  end
-
-  def initialize_amazon(recitateur, surah_id)
-    s3 = AWS::S3.new
-    surah_id_amazon =  count_number(surah_id)
-    @surah_mp3 = s3.buckets['hafizbe'].objects["#{recitateur}/#{surah_id_amazon}.mp3"]
   end
 
 end

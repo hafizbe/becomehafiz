@@ -8,8 +8,8 @@
 
 #surah_wrapper{
     direction: rtl;
-    font-size: 25px;
-    line-height: 50px;
+    font-size: 50px;
+    line-height: 200%;
     font-family: PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
 }
 
@@ -17,4 +17,21 @@
 {
     color: red;
     cursor: pointer;
+}
+
+.ayah_playing
+{
+    background-color: rgb(196, 236, 189);
+    -moz-border-radius:10px 0;
+    -webkit-border-radius:10px 0;
+    border-radius:10px 0;
+}
+
+.verset {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    padding-left: 10px;
+    padding-right: 10px;
 }

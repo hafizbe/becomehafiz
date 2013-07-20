@@ -1,7 +1,4 @@
-do_nothing = () =>
-  return true
-
-
+#Transforme 1 en 001
 convertSourate = (num) =>
   num = num.toString()
   if num .length == 1
@@ -9,41 +6,57 @@ convertSourate = (num) =>
   else if num.length == 2
     num = "0#{num}"
 
+#Transforme 1 en 01
 convertFichier = (num) =>
   num = num.toString();
   if num.length == 1
     num = "0"+num
   num
 
-play_fichier = (url_fichier, a, fichier_temp, nb_fichier, num_sourate, recitateur) =>
-  flag = 1
-  s = soundManager.getSoundById a
-  if !s
-    soundManager.createSound({
-                             id: a,
-                             url: url_fichier
-                             })
-  s = soundManager.getSoundById a
+# Lit le fichier mp3 en s'aidant du fichier xml.
+play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitateur, tab_duration, current_marker) =>
+  selector.next()
+  fichier_mp3   = url_fichier[0]
+  fichier_xml   = url_fichier[1]
+  tab_duration  =  get_time_ayah fichier_xml
+  soundManager.createSound({
+     id: id,
+     url: fichier_mp3
+  })
+  s = soundManager.getSoundById id
   s.play({
+
          multiShotEvents: true
          whileplaying : =>
-           laPosition = s.position
-           console.log laPosition
+           console.log num_sourate
+           if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
+            old_marker = current_marker
+            current_marker++
+
+            if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
+              selector.next()
+              console.log(s.position)
+
            return
          onfinish : =>
            if (fichier_temp + 1) <= nb_fichier
              url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
-             play_fichier url_fichier[0],convertSourate(fichier_temp + 1),fichier_temp + 1, nb_fichier, num_sourate, recitateur
+             fichier_xml   = url_fichier[1]
+             play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
            return
          })
-
   return
 
+# Ouverture d'une récitation
+play_recitation = (numSourate, recitateur) =>
 
-play_sourate = (numSourate, recitateur) =>
+
+
   nb_fichier = get_nb_fichiers numSourate
   url_fichier = get_url_fichier convertSourate(numSourate) , recitateur, convertFichier 1
-  play_fichier url_fichier[0],convertSourate(1),1, nb_fichier, numSourate, recitateur
+  fichier_xml = url_fichier[1]
+  tab_duration  =  get_time_ayah fichier_xml
+  play_fichier url_fichier,1,1, nb_fichier, numSourate, recitateur, tab_duration, 0
   return false
 
 get_nb_fichiers = (num_sourate) =>
@@ -71,11 +84,10 @@ get_time_ayah = (xml_url) =>
   tableau = []
   xmlDoc 	= 	loadXMLDOC xml_url
   versets	=	xmlDoc.getElementsByTagName("marker");
-
-  for i in [0...tableau.length]
+  for i in [0...versets.length]
     tableau[i] = versets[i].attributes.getNamedItem("time").nodeValue
 
-  tableau.length;
+  tableau
 
 convert_to_milliseconde = (time) =>
   tab 		  = time.split(':')
@@ -101,11 +113,20 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
    })
   return surah
 
+selector =
+  current_aya : 0
+  state : "stop"
+  next : ->
+    this.current_aya = this.current_aya + 1
+    $(".verset").removeClass("ayah_playing")
+    $(".break:contains('("+this.current_aya+")')").prev().addClass("ayah_playing",{duration:500})
+    return
+
+
 $(document).ready =>
   $("#lecteur_play").click =>
     surah_id = $("#lstSurahs").val();
     recitator_name = $("#lstRecitators").val();
-    play_sourate(surah_id, recitator_name);
-
+    play_recitation surah_id, recitator_name
     return false
   return
