@@ -184,6 +184,12 @@ $(document).ready(function(){
         $("#lstSurahsFrm").submit();
     });
 
+    $("#buttonTest").click(function(){
+        $(document.body).animate(
+            {scrollTop: $(".break:last").offset().top+"px"}, {easing: "swing", duration: 1600}
+        );
+    })
+
 
     /*$("#lecteur_play").click(function(){
         surah_id = $("#lstSurahs").val();

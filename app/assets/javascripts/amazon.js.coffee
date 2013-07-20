@@ -119,7 +119,11 @@ selector =
   next : ->
     this.current_aya = this.current_aya + 1
     $(".verset").removeClass("ayah_playing")
-    $(".break:contains('("+this.current_aya+")')").prev().addClass("ayah_playing",{duration:500})
+    verset =  $(".break:contains('("+this.current_aya+")')").prev()
+    verset.addClass("ayah_playing",{duration:500})
+    $(document.body).animate(
+     {scrollTop: verset.offset().top+"px"}, {easing: "swing", duration: 1600}
+    );
     return
 
 
