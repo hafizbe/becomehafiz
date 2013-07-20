@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+@import url(http://fonts.googleapis.com/earlyaccess/amiri.css);
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+@import url(http://fonts.googleapis.com/earlyaccess/lateef.css);
