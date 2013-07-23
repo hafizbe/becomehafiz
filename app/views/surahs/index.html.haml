@@ -19,6 +19,12 @@
         To versets
       =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"])
       %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
+      %p Loading
+      %div.progress.progress-striped.active
+        %div.bar{:style => "width : 0%"}
+
+
+
   #surah_wrapper{:class => 'span10'}
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
