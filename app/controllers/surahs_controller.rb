@@ -16,7 +16,7 @@ class SurahsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {:versets => @versets,
-              :from_verset_maximum => @from_verset_maximum }}
+              :from_verset_maximum => @from_verset_maximum, :from_verset_minimum => @from_verset_minimum }}
     end
   end
 

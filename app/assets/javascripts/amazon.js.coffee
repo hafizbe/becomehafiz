@@ -210,8 +210,22 @@ selector =
     this.current_aya = parseInt(this.current_aya) + 1
     return
 #Methode qui regénère la liste déroulante from_verset et to_verset
-regenerate_list_from_to = (option_max) =>
-  $("#lstToVersets").hide()
+regenerate_list_from_to = (option_from_max, option_to_max) =>
+
+  $("#lstFromVersets").find('option').remove()
+  for i in [1..option_to_max.max]
+    if i == parseInt option_from_max
+      $("#lstFromVersets").append('<option selected="selected" value="'+i+'">'+i+'</option>')
+    else
+      $("#lstFromVersets").append('<option value="'+i+'">'+i+'</option>')
+
+  $("#lstToVersets").find('option').remove()
+  for i in [1..option_to_max.max]
+    if i == parseInt option_to_max.max_selected
+      $("#lstToVersets").append('<option selected="selected" value="'+i+'">'+i+'</option>')
+    else
+      $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
+
 
 $(document).ready =>
   $("#lecteur_play").click =>
@@ -245,12 +259,11 @@ $(document).ready =>
       'lstToVersetsCheck' : lstToVersetsCheck
      }
      success:  (data) =>
-       regenerate_list_from_to 4
-       console.log data
+       regenerate_list_from_to data.from_verset_minimum,data.from_verset_maximum
        for i in [0...data.versets.length]
         $("#surah_wrapper").append('<span class="verset">'+data.versets[i].ayahText+'</span>')
         $("#surah_wrapper").append('<span class="break">('+data.versets[i].ayah_id+')</span>')
-       $("#surah_wrapper").fadeIn(1500)
+       $("#surah_wrapper").fadeIn(1000)
 
      error: =>
        alert('Error occured');
