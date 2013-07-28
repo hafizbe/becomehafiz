@@ -151,7 +151,7 @@ get_the_marker = (from_verset, file_of_verset, vlist) =>
    marker
 
 get_ruku_detail =() =>
-  url_detail  = 'https://s3.amazonaws.com/hafizbe/RukuDetail.xml'
+  url_detail  = 'http://s3.amazonaws.com/hafizbe/RukuDetail.xml'
   docXml = loadXMLDOC url_detail
 
 loadXMLDOC = (xml_url) =>
