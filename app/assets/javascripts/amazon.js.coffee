@@ -50,17 +50,17 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
      onload : =>
        if s.playState == 0
          s.play({
-                position:  convert_to_milliseconde tab_duration[current_marker]
-                multiShotEvents: true
-                onfinish : =>
-                 if (fichier_temp + 1) <= nb_fichier
-                   console.log "Terminé !"
-                   url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
-                   fichier_xml   = url_fichier[1]
-                   play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
-                   return
+          position:  convert_to_milliseconde tab_duration[current_marker]
+          multiShotEvents: true
+          onfinish : =>
+           if (fichier_temp + 1) <= nb_fichier
+             console.log "Terminé !"
+             url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+             fichier_xml   = url_fichier[1]
+             play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
+             return
 
-                })
+          })
          return
      whileplaying : =>
        console.log "#{s.position} <  #{convert_to_milliseconde tab_duration[current_marker + 1]} ?"
@@ -118,7 +118,6 @@ get_vlist =  (docXml, num_sourate) =>
       break;
   vlist.split ","
 
-
 # Détermine dans quel fichier se trouve un verset
 get_file_for_verset = (vlist, from_verset) =>
   i = 1
@@ -150,9 +149,6 @@ get_the_marker = (from_verset, file_of_verset, vlist) =>
        marker = from_verset - vlist[file_of_verset-1]
 
    marker
-
-
-
 
 get_ruku_detail =() =>
   url_detail  = 'https://s3.amazonaws.com/hafizbe/RukuDetail.xml'
@@ -204,24 +200,61 @@ selector =
   current_aya : $("#lstFromVersets").val()
   state : "stop"
   next : ->
-
     $(".verset").removeClass("ayah_playing")
-    console.log "Current aya #{this.current_aya}"
     verset =  $(".break:contains('("+this.current_aya+")')").prev()
     verset.addClass("ayah_playing",{duration:500})
+    verset_offset =verset.offset().top
     $('body,html').animate(
-     {scrollTop: verset.offset().top+"px"}, {easing: "swing", duration: 1600}
+     {scrollTop: (verset_offset - 5)+"px"}, {easing: "swing", duration: 1600}
     )
     this.current_aya = parseInt(this.current_aya) + 1
     return
-
+#Methode qui regénère la liste déroulante from_verset et to_verset
+regenerate_list_from_to = (option_max) =>
+  $("#lstToVersets").hide()
 
 $(document).ready =>
   $("#lecteur_play").click =>
+    selector.current_aya = $("#lstFromVersets").val()
+
     surah_id = $("#lstSurahs").val()
     recitator_name = $("#lstRecitators").val()
     from_verset =  $("#lstFromVersets").val()
     to_verset =  $("#lstToVersets").val()
     play_recitation surah_id, recitator_name, from_verset, to_verset
+    return false
+  $("#lstSurahsFrm").submit =>
+    lstSurahs = $("#lstSurahs").val()
+    lstRecitators = $("#lstRecitators").val()
+    lstFromVersets = $("#lstFromVersets").val()
+    lstToVersets = $("#lstToVersets").val()
+    lstToVersetsCheck = $("#lstToVersetsCheck").val()
+    $("#surah_wrapper").hide()
+
+    $("#surah_wrapper").empty()
+
+    $.ajax({
+     dataType: "json",
+     type: "POST",
+     url: "/surahs",
+     data: {
+      'lstSurahs': lstSurahs,
+      'lstRecitators': lstRecitators,
+      'lstFromVersets' : lstFromVersets,
+      'lstToVersets' : lstToVersets,
+      'lstToVersetsCheck' : lstToVersetsCheck
+     }
+     success:  (data) =>
+       regenerate_list_from_to 4
+       console.log data
+       for i in [0...data.versets.length]
+        $("#surah_wrapper").append('<span class="verset">'+data.versets[i].ayahText+'</span>')
+        $("#surah_wrapper").append('<span class="break">('+data.versets[i].ayah_id+')</span>')
+       $("#surah_wrapper").fadeIn(1500)
+
+     error: =>
+       alert('Error occured');
+    })
+
     return false
   return

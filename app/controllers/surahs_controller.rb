@@ -13,6 +13,11 @@ class SurahsController < ApplicationController
     getNameRecitators # Récupère recitateurs pour la liste déroulante
 
     @versets = Surah.getAyahs @surah_id,@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => {:versets => @versets,
+              :from_verset_maximum => @from_verset_maximum }}
+    end
   end
 
 
