@@ -72,6 +72,13 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
            selector.next()
            console.log(s.position)
        return
+     onfinish : =>
+       if (fichier_temp + 1) <= nb_fichier
+         console.log "Terminé !"
+         url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+         fichier_xml   = url_fichier[1]
+         play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
+         return
 
   })
   s = soundManager.getSoundById id
@@ -101,6 +108,7 @@ play_recitation = (num_sourate, recitateur, from_verset, to_verset) =>
   play_fichier url_fichier,file_of_verset,file_of_verset, nb_fichier, num_sourate, recitateur, tab_duration, marker
   return false
 
+#Récupère le nb de fichier pour une sourate
 get_nb_fichiers = (docXml, num_sourate) =>
   doc = docXml.getElementsByTagName "marker"
   for i in [0...doc.length]
@@ -110,6 +118,7 @@ get_nb_fichiers = (docXml, num_sourate) =>
   nb_fichiers = vlist.split ","
   nb_fichiers.length
 
+#Récupère la vlist d'une sourate
 get_vlist =  (docXml, num_sourate) =>
   doc = docXml.getElementsByTagName "marker"
   for i in [0...doc.length]
@@ -140,9 +149,10 @@ get_file_for_verset = (vlist, from_verset) =>
       i++
   result
 
+#Récupère le marker associé au début du verset (Exemple : Le verset 24 correspond au marker 4 du fichier xml)
 get_the_marker = (from_verset, file_of_verset, vlist) =>
-   marker = 1
-   unless from_verset == 1
+   marker = 0
+   unless parseInt(from_verset) == 1
      if file_of_verset == 1
        marker = from_verset
      else
@@ -150,10 +160,13 @@ get_the_marker = (from_verset, file_of_verset, vlist) =>
 
    marker
 
+#Récupère le fichier xml global
 get_ruku_detail =() =>
   url_detail  = 'http://s3.amazonaws.com/hafizbe/RukuDetail.xml'
   docXml = loadXMLDOC url_detail
 
+
+#Charge un fichier Xml en ajax
 loadXMLDOC = (xml_url) =>
   if window.XMLHttpRequest
     xmlhttp=new XMLHttpRequest();
@@ -163,6 +176,7 @@ loadXMLDOC = (xml_url) =>
   xmlhttp.send();
   xmlDoc=xmlhttp.responseXML;
 
+#Retourne dans un tableau tous les markers
 get_time_ayah = (xml_url) =>
   tableau = []
   xmlDoc 	= 	loadXMLDOC xml_url
@@ -171,7 +185,7 @@ get_time_ayah = (xml_url) =>
     tableau[i] = versets[i].attributes.getNamedItem("time").nodeValue
 
   tableau
-
+#Converti un temps en milliseconde
 convert_to_milliseconde = (time) =>
   tab 		  = time.split(':')
   heures 		= parseFloat(tab[0]) * 3600000
@@ -179,6 +193,7 @@ convert_to_milliseconde = (time) =>
   secondes 	= parseFloat(tab[2]) * 1000
   heures + minutes + secondes
 
+#Return url xml et mp3 pour une sourate, en foncttion du récitateur et du nombre de fichier (01, 02 etc..)
 get_url_fichier = (numSourate, recitateur, numero_fichier) =>
   surah = new Array(2)
 
@@ -209,6 +224,7 @@ selector =
     )
     this.current_aya = parseInt(this.current_aya) + 1
     return
+
 #Methode qui regénère la liste déroulante from_verset et to_verset
 regenerate_list_from_to = (option_from_max, option_to_max) =>
 
@@ -228,6 +244,7 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 
 
 $(document).ready =>
+  #Clic sur play
   $("#lecteur_play").click =>
     selector.current_aya = $("#lstFromVersets").val()
 
@@ -237,6 +254,8 @@ $(document).ready =>
     to_verset =  $("#lstToVersets").val()
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
+
+  #Validation du formulaire
   $("#lstSurahsFrm").submit =>
     lstSurahs = $("#lstSurahs").val()
     lstRecitators = $("#lstRecitators").val()
