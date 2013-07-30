@@ -47,10 +47,7 @@
 
 #surah_option_wrapper
 {
-    position: fixed;
     padding: 10px;
-    background-color: #F3F3F3;
-    border-radius: 5px;
-    background: none repeat scroll 0 0 #F6F6F6;
-    border: 5px solid #ECECEC;
+    top: 140px;
+    left: 20px;
 }

@@ -220,7 +220,7 @@ selector =
     verset.addClass("ayah_playing",{duration:500})
     verset_offset =verset.offset().top
     $('body,html').animate(
-     {scrollTop: (verset_offset - 5)+"px"}, {easing: "swing", duration: 1600}
+     {scrollTop: (verset_offset - 50)+"px"}, {easing: "swing", duration: 1600}
     )
     this.current_aya = parseInt(this.current_aya) + 1
     return
