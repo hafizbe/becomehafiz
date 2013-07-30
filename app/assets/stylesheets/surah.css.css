@@ -11,6 +11,7 @@
     font-size: 50px;
     line-height: 200%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
+    float: right;
 }
 
 #lecteur_play:hover
@@ -34,4 +35,22 @@
     transition: all 0.5s ease;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.verset:hover
+{
+    background-color: #b0f0ff;
+    cursor: pointer;
+    -moz-border-radius: 10px 0;
+    -webkit-border-radius: 10px 0;
+}
+
+#surah_option_wrapper
+{
+    position: fixed;
+    padding: 10px;
+    background-color: #F3F3F3;
+    border-radius: 5px;
+    background: none repeat scroll 0 0 #F6F6F6;
+    border: 5px solid #ECECEC;
 }

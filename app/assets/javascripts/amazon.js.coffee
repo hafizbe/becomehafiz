@@ -20,6 +20,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
   fichier_mp3   = url_fichier[0]
   fichier_xml   = url_fichier[1]
   tab_duration  =  get_time_ayah fichier_xml
+  selector.current_file_id = id
   if current_marker == 0
     state_auto_play = true
   else
@@ -223,6 +224,12 @@ selector =
     )
     this.current_aya = parseInt(this.current_aya) + 1
     return
+  restart_loading : ->
+    classe = $("#surah_option_wrapper .progress").attr("class").split(" ")[1]
+    $("#surah_option_wrapper .progress").removeClass(classe)
+
+    $("#surah_option_wrapper .progress .bar").css("width","0%")
+
 
 #Methode qui regénère la liste déroulante from_verset et to_verset
 regenerate_list_from_to = (option_from_max, option_to_max) =>
@@ -254,16 +261,25 @@ $(document).ready =>
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
 
+
+
   #Validation du formulaire
   $("#lstSurahsFrm").submit =>
+    unless selector.current_file_id == null
+      son = soundManager.getSoundById selector.current_file_id
+      unless typeof son == 'undefined'
+        son.destruct()
+        selector.restart_loading()
+
     lstSurahs = $("#lstSurahs").val()
     lstRecitators = $("#lstRecitators").val()
     lstFromVersets = $("#lstFromVersets").val()
     lstToVersets = $("#lstToVersets").val()
     lstToVersetsCheck = $("#lstToVersetsCheck").val()
-    $("#surah_wrapper").hide()
-
     $("#surah_wrapper").empty()
+    $("#surah_wrapper").append('<div class="progress progress-striped active">
+                                 <div class="bar" style="width: 100%;"></div>
+                               </div>')
 
     $.ajax({
      dataType: "json",
@@ -277,6 +293,7 @@ $(document).ready =>
       'lstToVersetsCheck' : lstToVersetsCheck
      }
      success:  (data) =>
+       $("#surah_wrapper").empty()
        regenerate_list_from_to data.from_verset_minimum,data.from_verset_maximum
        for i in [0...data.versets.length]
         $("#surah_wrapper").append('<span class="verset">'+data.versets[i].ayahText+'</span>')

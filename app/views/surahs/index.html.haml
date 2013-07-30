@@ -2,31 +2,37 @@
   %h1= 'Welcome to Become Hafiz !'
 
 #surah_container{:class => 'row-fluid'}
+
   #surah_option_wrapper{:class => 'span2'}
+
     %span#lecteur_play Play
     %span.hide.aa test
     %i{:class => "icon-play"}
     =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
       %label
         Surahs
-      =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_id, surah_name|[surah_name,surah_id] }, @surah_id)
+      =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_id, surah_name|[surah_name,surah_id] }, @surah_id),:class =>"input-medium"
       %label
         Recitators
-      =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name)
+      =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
       %label
         From versets
-      =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum)
+      =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum),:class =>"input-small"
       %label
         To versets
-      =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"])
+      =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
       %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
       %p Loading
       %div.progress.progress-striped.active
         %div.bar{:style => "width : 0%"}
-
-
-
+  %div.well.span10{:style => "float: right"}
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et faucibus risus. Morbi imperdiet arcu sit amet adipiscing dictum.
+    Donec ultrices mi neque, in faucibus sem lacinia vitae. Fusce convallis posuere urna sit amet tincidunt. Morbi ac leo nunc.
+    Vestibulum sed diam et metus vehicula sodales a pellentesque nisl. Mauris id lacus consectetur, vulputate sapien sed, posuere ipsum.
+    Nam vulputate justo nisl, non pretium nibh pellentesque quis. Sed erat mi, aliquet quis faucibus dictum, porta at turpis.
+    Etiam eros nunc, gravida a felis et, vehicula elementum magna. Maecenas tempus enim ac magna egestas congue. Vestibulum sit amet neque hendrerit, pharetra diam ut, imperdiet augue. Ut dictum leo ac velit cursus, sit amet pharetra libero tincidunt. Quisque vitae tincidunt ipsum. In eleifend, risus in blandit elementum, odio orci ultricies magna, in sagittis metus nisl eget risus. Suspendisse felis erat, convallis eget arcu non, malesuada fermentum lacus. Donec ac congue turpis, commodo accumsan nibh. Vivamus nec purus eget lacus venenatis cursus a nec turpis.
   #surah_wrapper{:class => 'span10'}
+
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
       %span{:class => 'verset'}=verset.ayahText
