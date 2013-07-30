@@ -4,6 +4,7 @@
 #surah_container{:class => 'row-fluid'}
   #surah_option_wrapper{:class => 'span2'}
     %span#lecteur_play Play
+    %span.hide.aa test
     %i{:class => "icon-play"}
     =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
       %label

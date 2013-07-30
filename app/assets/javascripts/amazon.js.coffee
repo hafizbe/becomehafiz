@@ -30,6 +30,8 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
      stream: true
      autoLoad: true
      autoPlay: state_auto_play
+     multiShotEvents: false
+     multiShot: false
      whileloading : =>
        total = s.bytesTotal
        rapport = (s.bytesLoaded/total) *100
@@ -48,6 +50,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
        $("#surah_option_wrapper .progress .bar").css("width",rapport+"%")
        return
      onload : =>
+       console.log "Le son est chargé ! Etat => #{s.playState}"
        if s.playState == 0
          s.play({
           position:  convert_to_milliseconde tab_duration[current_marker]
@@ -63,7 +66,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
           })
          return
      whileplaying : =>
-       console.log "#{s.position} <  #{convert_to_milliseconde tab_duration[current_marker + 1]} ?"
+       console.log s.position
        if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
          old_marker = current_marker
          current_marker++
@@ -84,11 +87,6 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
   s = soundManager.getSoundById id
   console.log s
 
-  #s.play({
-         #from:  convert_to_milliseconde tab_duration[current_marker]
-         #multiShotEvents: true
-
-         #})
   return
 
 # Ouverture d'une récitation
@@ -214,6 +212,7 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
 selector =
   current_aya : $("#lstFromVersets").val()
   state : "stop"
+  current_file_id : null
   next : ->
     $(".verset").removeClass("ayah_playing")
     verset =  $(".break:contains('("+this.current_aya+")')").prev()
