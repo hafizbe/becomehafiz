@@ -26,12 +26,12 @@
       %div.progress.progress-striped.active
         %div.bar{:style => "width : 0%"}
   %div.well.span10{:style => "float: right"}
-    'The Messenger of Allah (blessings of Allah be upon him and his family) has said: “The best of those amongst you is the one who learns the Qur’an and then teaches it to others.”'
+    %p='The Messenger of Allah (blessings of Allah be upon him and his family) has said: “The best of those amongst you is the one who learns the Qur’an and then teaches it to others.”'
   #surah_wrapper{:class => 'span10'}
 
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %span{:class => 'verset'}=verset.ayahText
+      %span{:class => 'verset', 'modal_name'=>'myModal'}=verset.ayahText
       %span{:class => 'break'} (#{i})
       -i = i + 1
 

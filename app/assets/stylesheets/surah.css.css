@@ -35,15 +35,31 @@
     transition: all 0.5s ease;
     padding-left: 10px;
     padding-right: 10px;
+    color: #393939;
 }
 
 .verset:hover
 {
+    text-decoration: none;
+    color: inherit;
     background-color: #b0f0ff;
     cursor: pointer;
     -moz-border-radius: 10px 0;
     -webkit-border-radius: 10px 0;
 }
+
+.verset:active
+{
+    border: none !important;
+    color: pink;
+}
+
+.verset:visited
+{
+    border: none !important ;
+}
+
+
 
 #surah_option_wrapper
 {

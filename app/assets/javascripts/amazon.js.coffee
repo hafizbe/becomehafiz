@@ -15,12 +15,12 @@ convertFichier = (num) =>
 
 # Lit le fichier mp3 en s'aidant du fichier xml.
 play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitateur, tab_duration, current_marker) =>
-  selector.next()
+  player.next()
   current_marker = parseInt current_marker
   fichier_mp3   = url_fichier[0]
   fichier_xml   = url_fichier[1]
   tab_duration  =  get_time_ayah fichier_xml
-  selector.current_file_id = id
+  player.current_file_id = id
   if current_marker == 0
     state_auto_play = true
   else
@@ -73,7 +73,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
          current_marker++
 
          if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
-           selector.next()
+           player.next()
            console.log(s.position)
        return
      onfinish : =>
@@ -83,6 +83,14 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
          fichier_xml   = url_fichier[1]
          play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
          return
+     onplay : =>
+       player.state = "play"
+     onstop : =>
+       player.state = "stop"
+     onpause: =>
+       player.state = "pause"
+     onresume: =>
+       player.state = "resume"
 
   })
   s = soundManager.getSoundById id
@@ -210,7 +218,7 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
    })
   return surah
 
-selector =
+player =
   current_aya : $("#lstFromVersets").val()
   state : "stop"
   current_file_id : null
@@ -250,9 +258,31 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 
 
 $(document).ready =>
+
+  $('#surah_wrapper').on('click', '.verset', (e) =>
+    current_sound = soundManager.getSoundById player.current_file_id
+    unless player.state == "pause"
+       unless  current_sound == null
+        current_sound.pause()
+    modal_name = $(e.currentTarget).attr('modal_name')
+    $("#"+modal_name).modal()
+    $('#closemodal').click =>
+      $("#"+modal_name).modal('hide');
+    $("#"+modal_name).on("hide", =>
+      if player.state == "pause"
+        current_sound.resume()
+        i = player.current_aya - 1
+        current_offset =   $(".break:contains('("+i+")')").prev()
+        $('body,html').animate(
+          {scrollTop: (current_offset.offset().top - 50)+"px"}, {easing: "swing", duration: 1}
+        )
+
+    )
+  )
+
   #Clic sur play
   $("#lecteur_play").click =>
-    selector.current_aya = $("#lstFromVersets").val()
+    player.current_aya = $("#lstFromVersets").val()
 
     surah_id = $("#lstSurahs").val()
     recitator_name = $("#lstRecitators").val()
@@ -265,11 +295,11 @@ $(document).ready =>
 
   #Validation du formulaire
   $("#lstSurahsFrm").submit =>
-    unless selector.current_file_id == null
-      son = soundManager.getSoundById selector.current_file_id
+    unless player.current_file_id == null
+      son = soundManager.getSoundById player.current_file_id
       unless typeof son == 'undefined'
         son.destruct()
-        selector.restart_loading()
+        player.restart_loading()
 
     lstSurahs = $("#lstSurahs").val()
     lstRecitators = $("#lstRecitators").val()
@@ -296,7 +326,7 @@ $(document).ready =>
        $("#surah_wrapper").empty()
        regenerate_list_from_to data.from_verset_minimum,data.from_verset_maximum
        for i in [0...data.versets.length]
-        $("#surah_wrapper").append('<span class="verset">'+data.versets[i].ayahText+'</span>')
+        $("#surah_wrapper").append('<span modal_name="myModal" class="verset">'+data.versets[i].ayahText+'</span>')
         $("#surah_wrapper").append('<span class="break">('+data.versets[i].ayah_id+')</span>')
        $("#surah_wrapper").fadeIn(1000)
 
