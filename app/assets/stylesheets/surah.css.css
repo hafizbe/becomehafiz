@@ -67,3 +67,11 @@
     top: 140px;
     left: 20px;
 }
+
+
+#modal-verset {
+    direction: rtl;
+    font-size: 50px;
+    line-height: 200%;
+    font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
+}

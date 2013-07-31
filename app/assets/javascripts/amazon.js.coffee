@@ -260,6 +260,7 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 $(document).ready =>
 
   $('#surah_wrapper').on('click', '.verset', (e) =>
+    $("#modal-verset").html($(e.currentTarget).text())
     current_sound = soundManager.getSoundById player.current_file_id
     unless player.state == "pause"
        unless  current_sound == null
