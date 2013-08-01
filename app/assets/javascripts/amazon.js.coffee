@@ -238,6 +238,8 @@ player =
 
     $("#surah_option_wrapper .progress .bar").css("width","0%")
 
+get_ayah_number : =>
+  alert "ok"
 
 #Methode qui regénère la liste déroulante from_verset et to_verset
 regenerate_list_from_to = (option_from_max, option_to_max) =>
@@ -271,13 +273,15 @@ $(document).ready =>
       $("#"+modal_name).modal('hide');
     $("#"+modal_name).on("hide", =>
       if player.state == "pause"
+        current_sound = soundManager.getSoundById player.current_file_id
         current_sound.resume()
         i = player.current_aya - 1
         current_offset =   $(".break:contains('("+i+")')").prev()
         $('body,html').animate(
           {scrollTop: (current_offset.offset().top - 50)+"px"}, {easing: "swing", duration: 1}
         )
-
+      else
+        alert "ok"
     )
   )
 
