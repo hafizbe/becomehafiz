@@ -19,7 +19,31 @@
   </tr>
 <% end %>
 </table>
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown trigger</a>
+  <ul class="dropdown-menu">
+    <li><a href=><span class="label label-success">Very Good</span></a></li>
+    <li><a href=><span class="label label-warning">Good</span></a></li>
+    <li><a href=><span class="label label-important">Bad</span></a></li>
+    <li role="presentation" class="divider"></li>
+    <li><a href=><span class="label label-info">Repeat the verse</span></a></li>
+  </ul>
+</div>
 
-<br />
+<div class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</a>
+  <ul class="dropdown-menu">
+    <li>
+      <a class="label label-success" href="">Very Good</a>
+    </li>
+    <li>
+      <a class="label label-warning" href="">Good</a>
+    </li>
+    <li>
+      <a class="label label-important" href="">Bad</a>
+    </li>
+  </ul>
+</div>
+
 
 <%= link_to 'New Recitator', new_recitator_path %>

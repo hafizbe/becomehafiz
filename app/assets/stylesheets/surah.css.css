@@ -75,3 +75,17 @@
     line-height: 200%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
 }
+
+.verset .dropdown-menu li a span
+{
+    font-size: 11.844px !important;
+    direction: ltr !important;
+    font-family: verdana, arial, helvetica, sans-serif;
+    display: inline-block !important;
+    font-weight: bold !important;
+    line-height: 14px !important;
+    color: #ffffff;
+    vertical-align: baseline !important;
+    white-space: nowrap !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)!important;
+}

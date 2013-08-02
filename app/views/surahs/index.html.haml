@@ -31,7 +31,22 @@
 
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %span{:class => 'verset', 'modal_name'=>'myModal'}=verset.ayahText
-      %span{:class => 'break'} (#{i})
+      %div.dropdown.verset
+        %a{:href => '', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}=verset.ayahText
+        %ul.dropdown-menu
+          %li
+            %a{:href => ''}
+              %span.label.label-success Very Good
+          %li
+            %a{:href => ''}
+              %span.label.label-warning Good
+          %li
+            %a{:href => ''}
+              %span.label.label-important Bad
+
+
+
+      /%span{:class => 'verset', 'modal_name'=>'myModal'}=verset.ayahText
+      /%span{:class => 'break'} (#{i})
       -i = i + 1
 

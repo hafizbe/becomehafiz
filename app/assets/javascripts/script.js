@@ -187,6 +187,9 @@ $(document).ready(function(){
 
 
 
+
+
+
     /*$("#lecteur_play").click(function(){
         surah_id = $("#lstSurahs").val();
         recitator_name = $("#lstRecitators").val();
