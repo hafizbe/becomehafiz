@@ -8,11 +8,13 @@
 
 #surah_wrapper{
     direction: rtl;
-    font-size: 50px;
+    font-size: 35px;
     line-height: 200%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
-    float: right;
+    float: left;
 }
+
+
 
 #lecteur_play:hover
 {

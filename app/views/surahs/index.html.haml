@@ -3,7 +3,7 @@
 
 #surah_container{:class => 'row-fluid'}
 
-  #surah_option_wrapper.span2.well.navbar.navbar-fixed-top
+  #surah_option_wrapper.span2.well.navbar
 
     %span#lecteur_play Play
     %span.hide.aa test
@@ -25,28 +25,13 @@
       %p Loading
       %div.progress.progress-striped.active
         %div.bar{:style => "width : 0%"}
-  %div.well.span10{:style => "float: right"}
-    %p='The Messenger of Allah (blessings of Allah be upon him and his family) has said: “The best of those amongst you is the one who learns the Qur’an and then teaches it to others.”'
-  #surah_wrapper{:class => 'span10'}
-
+  #surah_wrapper{:class => 'span7'}
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %div.dropdown.verset
-        %a{:href => '', :class => 'dropdown-toggle', 'data-toggle' => 'dropdown'}=verset.ayahText
-        %ul.dropdown-menu
-          %li
-            %a{:href => ''}
-              %span.label.label-success Very Good
-          %li
-            %a{:href => ''}
-              %span.label.label-warning Good
-          %li
-            %a{:href => ''}
-              %span.label.label-important Bad
-
-
-
-      /%span{:class => 'verset', 'modal_name'=>'myModal'}=verset.ayahText
-      /%span{:class => 'break'} (#{i})
+      %span{:class => 'verset', 'modal_name' =>'myModal'}=verset.ayahText
+      %span{:class => 'break'}="("+i.to_s+")"
       -i = i + 1
+  %div.span3.well
+    %h4{:style =>'text-align : center'}='Panel Configuration'
+
 
