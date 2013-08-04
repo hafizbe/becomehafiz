@@ -13,4 +13,5 @@ class Api::V1::AmazonController < ApplicationController
       format.json { render :json => @surah.to_json }
     end
   end
+
 end

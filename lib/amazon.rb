@@ -10,4 +10,13 @@ module Amazon
     end
     number
   end
+
+  # Retourne un tableau avec la traduction de chaque verset
+  def get_traduction(lang, num_sourate)
+    require 'open-uri'
+    s3 = AWS::S3.new
+    url = s3.buckets['hafizbe'].objects["traduction/#{lang}/Chapter#{num_sourate}.xml"].url_for(:read, :secure => false).to_s
+    document = Nokogiri::XML(open(url))
+    versets = document.xpath("//Verse/text()")
+  end
 end

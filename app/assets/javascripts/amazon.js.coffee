@@ -296,7 +296,8 @@ $(document).ready =>
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
 
-
+  $(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
+  $(".verset:first").popover('show')
 
   #Validation du formulaire
   $("#lstSurahsFrm").submit =>

@@ -28,7 +28,7 @@
   #surah_wrapper{:class => 'span7'}
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %span{:class => 'verset', 'modal_name' =>'myModal'}=verset.ayahText
+      %span.verset.test_popover{:class => 'verset', 'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'left'}=verset.ayahText
       %span{:class => 'break'}="("+i.to_s+")"
       -i = i + 1
   %div.span3.well

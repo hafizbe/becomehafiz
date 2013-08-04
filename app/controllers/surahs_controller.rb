@@ -1,7 +1,9 @@
 class SurahsController < ApplicationController
-  #include Amazon
+  include Amazon
   def index
     @from_verset_minimum = choose_verset_minimum
+    url = get_traduction "fr" , "001"
+
 
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
     getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
