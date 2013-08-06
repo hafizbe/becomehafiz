@@ -22,15 +22,18 @@
         To versets
       =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
       %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
+      %div.divider
       %p Loading
       %div.progress.progress-striped.active
         %div.bar{:style => "width : 0%"}
+      %p Traduction
   #surah_wrapper{:class => 'span7'}
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
-      %span.verset.test_popover{:class => 'verset', 'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'left'}=verset.ayahText
-      %span{:class => 'break'}="("+i.to_s+")"
-      -i = i + 1
+      %div.verset_wrapper
+        %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'bottom', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
+        %span{:class => 'break'}="("+i.to_s+")"
+        -i = i + 1
   %div.span3.well
     %h4{:style =>'text-align : center'}='Panel Configuration'
 

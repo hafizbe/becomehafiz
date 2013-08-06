@@ -223,8 +223,12 @@ player =
   state : "stop"
   current_file_id : null
   next : ->
-    $(".verset").removeClass("ayah_playing")
-    verset =  $(".break:contains('("+this.current_aya+")')").prev()
+    #Si la traduction est selectionnée
+    if(true)
+      player.show_traduction()
+    $(".verset_content").removeClass("ayah_playing")
+    verset =  $("#ayah_#{this.current_aya}")
+
     verset.addClass("ayah_playing",{duration:500})
     verset_offset =verset.offset().top
     $('body,html').animate(
@@ -237,6 +241,13 @@ player =
     $("#surah_option_wrapper .progress").removeClass(classe)
 
     $("#surah_option_wrapper .progress .bar").css("width","0%")
+  show_traduction : ->
+    traduction = $("#ayah_#{this.current_aya}").attr("data-traduction")
+    ayah_precedent = parseInt this.current_aya - 1
+    $("#ayah_#{ayah_precedent}").popover('hide')
+    $("#ayah_#{this.current_aya}").popover({ title: 'Français', content:  traduction });
+    $("#ayah_#{this.current_aya}").popover('show')
+
 
 get_ayah_number : =>
 
@@ -296,8 +307,8 @@ $(document).ready =>
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
 
-  $(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
-  $(".verset:first").popover('show')
+  #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
+  #$(".verset:first").popover('show')
 
   #Validation du formulaire
   $("#lstSurahsFrm").submit =>

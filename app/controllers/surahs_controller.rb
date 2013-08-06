@@ -2,7 +2,11 @@ class SurahsController < ApplicationController
   include Amazon
   def index
     @from_verset_minimum = choose_verset_minimum
-    url = get_traduction "fr" , "001"
+
+
+    @versets_traduit = get_traduction "fr" , "001"
+    @langues = get_langue
+
 
 
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
@@ -23,7 +27,12 @@ class SurahsController < ApplicationController
   end
 
 
-  protected
+  private
+
+  def get_langue
+    hm = {}
+    hm['fr'] = 'French'
+  end
 
   def choose_verset_minimum
     val = 1

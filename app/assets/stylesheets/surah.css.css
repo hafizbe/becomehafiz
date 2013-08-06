@@ -34,7 +34,7 @@
     border-radius:10px 0;
 }
 
-.verset {
+.verset_content {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -46,7 +46,7 @@
     line-height: 103px;
 }
 
-.verset:hover
+.verset_content:hover
 {
     text-decoration: none;
     color: inherit;
@@ -96,4 +96,8 @@
     vertical-align: baseline !important;
     white-space: nowrap !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)!important;
+}
+
+.verset_wrapper{
+    display: inline;
 }
