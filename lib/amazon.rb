@@ -1,6 +1,6 @@
 module Amazon
   # Permet de transformer les "1" en "001" car toutes les sourates sont présentées sous la forme "001.mp3"
-  def count_number(number)
+  def id_surah_to_string(number)
     if number.to_s.size == 1
       number = "00#{number}"
     else
@@ -9,18 +9,5 @@ module Amazon
       end
     end
     number
-  end
-  # Retourne un tableau avec la traduction de chaque verset
-  def get_traduction(lang, num_sourate)
-    require 'open-uri'
-    s3 = AWS::S3.new
-    url = s3.buckets['hafizbe'].objects["traduction/#{lang}/Chapter#{num_sourate}.xml"].url_for(:read, :secure => false).to_s
-    document = Nokogiri::XML(open(url))
-    versets = document.xpath("//Verse/text()")
-    tab_verset = []
-    versets.each do |verset|
-      tab_verset << verset.text()
-    end
-    tab_verset
   end
 end

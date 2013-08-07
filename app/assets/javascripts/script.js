@@ -179,6 +179,9 @@ $(document).ready(function(){
     $('#lstFromVersets').change(function() {
         $("#lstSurahsFrm").submit();
     });
+    $('#lstTraduction').change(function() {
+        $("#lstSurahsFrm").submit();
+    });
     $('#lstToVersets').change(function() {
         $("#lstToVersetsCheck").val(1)
         $("#lstSurahsFrm").submit();

@@ -3,12 +3,6 @@ class SurahsController < ApplicationController
   def index
     @from_verset_minimum = choose_verset_minimum
 
-
-    @versets_traduit = get_traduction "fr" , "001"
-    @langues = get_langue
-
-
-
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
     getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
 
@@ -17,6 +11,10 @@ class SurahsController < ApplicationController
 
     @recitator_name = choose_recitator_name # On détermine le recitator
     getNameRecitators # Récupère recitateurs pour la liste déroulante
+
+    @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
+    @langues = get_langue
+    @langue_selected = choose_traduction
 
     @versets = Surah.getAyahs @surah_id,@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
     respond_to do |format|
@@ -29,9 +27,30 @@ class SurahsController < ApplicationController
 
   private
 
+  # Retourne un tableau avec la traduction de chaque verset
+  def get_traduction(num_sourate)
+    tab_verset = nil
+    unless  params[:lstTraduction].blank? or params[:lstTraduction] == "none"
+      require 'open-uri'
+      s3 = AWS::S3.new
+      url = s3.buckets['hafizbe'].objects["traduction/#{params[:lstTraduction]}/Chapter#{num_sourate}.xml"].url_for(:read, :secure => false).to_s
+      document = Nokogiri::XML(open(url))
+      versets = document.xpath("//Verse/text()")
+      tab_verset = []
+      versets.each do |verset|
+        tab_verset << verset.text()
+      end
+      tab_verset
+    end
+  end
+
   def get_langue
     hm = {}
+    hm['none'] = 'None'
     hm['fr'] = 'French'
+    hm['en'] = 'English'
+    hm['es'] = 'Spanish'
+    hm
   end
 
   def choose_verset_minimum
@@ -62,6 +81,14 @@ class SurahsController < ApplicationController
     surah_id
   end
 
+  def choose_traduction
+    lang = 'none'
+    unless params[:lstTraduction].blank?
+      lang = params[:lstTraduction]
+    end
+    lang
+  end
+
   def getNameSurah
     @sourates_list = Surah.getNameSurah
   end
@@ -74,6 +101,13 @@ class SurahsController < ApplicationController
     recitator_name
   end
 
+  def choose_traduction
+    traduction = "none"
+    unless params[:lstTraduction].blank?
+      traduction  = params[:lstTraduction]
+    end
+    traduction
+  end
   def getNameRecitators
     @mapRecitators = {}
     Recitator.all.each do |recitator|

@@ -245,14 +245,15 @@ player =
     traduction = $("#ayah_#{this.current_aya}").attr("data-traduction")
     ayah_precedent = parseInt this.current_aya - 1
     $("#ayah_#{ayah_precedent}").popover('hide')
-    $("#ayah_#{this.current_aya}").popover({ title: 'Français', content:  traduction });
-    $("#ayah_#{this.current_aya}").popover('show')
+    unless $("#ayah_#{this.current_aya}").attr("data-placement") == "none"
+      $("#ayah_#{this.current_aya}").popover({ title: 'Français', content:  traduction });
+      $("#ayah_#{this.current_aya}").popover('show')
 
 
 get_ayah_number : =>
-
-
 #Methode qui regénère la liste déroulante from_verset et to_verset
+
+
 regenerate_list_from_to = (option_from_max, option_to_max) =>
 
   $("#lstFromVersets").find('option').remove()
@@ -269,9 +270,7 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
     else
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
-
 $(document).ready =>
-
   $('#surah_wrapper').on('click', '.verset', (e) =>
     $("#modal-verset").html($(e.currentTarget).text())
     current_sound = soundManager.getSoundById player.current_file_id
@@ -327,7 +326,6 @@ $(document).ready =>
     $("#surah_wrapper").append('<div class="progress progress-striped active">
                                  <div class="bar" style="width: 100%;"></div>
                                </div>')
-
     $.ajax({
      dataType: "json",
      type: "POST",
@@ -339,17 +337,16 @@ $(document).ready =>
       'lstToVersets' : lstToVersets,
       'lstToVersetsCheck' : lstToVersetsCheck
      }
-     success:  (data) =>
+     success: (data) =>
        $("#surah_wrapper").empty()
        regenerate_list_from_to data.from_verset_minimum,data.from_verset_maximum
        for i in [0...data.versets.length]
         $("#surah_wrapper").append('<span modal_name="myModal" class="verset">'+data.versets[i].ayahText+'</span>')
         $("#surah_wrapper").append('<span class="break">('+data.versets[i].ayah_id+')</span>')
        $("#surah_wrapper").fadeIn(1000)
-
      error: =>
        alert('Error occured');
     })
 
-    return false
+    return true
   return

@@ -1,7 +1,7 @@
 class Api::V1::AmazonController < ApplicationController
   include Amazon
   def get_url
-    id_surah  = count_number params[:surah]
+    id_surah  = id_surah_to_string params[:surah]
     s3 = AWS::S3.new
     surah_mp3 = s3.buckets['hafizbe'].objects["#{params[:recitator]}/#{params[:surah]}/#{params[:surah]}-#{params[:num_fichier]}.mp3"]
     surah_xml = s3.buckets['hafizbe'].objects["#{params[:recitator]}/#{params[:surah]}/#{params[:surah]}-#{params[:num_fichier]}.xml"]
