@@ -257,15 +257,15 @@ get_ayah_number : =>
 regenerate_list_from_to = (option_from_max, option_to_max) =>
 
   $("#lstFromVersets").find('option').remove()
-  for i in [1..option_to_max.max]
+  for i in [1..option_to_max[0]]
     if i == parseInt option_from_max
       $("#lstFromVersets").append('<option selected="selected" value="'+i+'">'+i+'</option>')
     else
       $("#lstFromVersets").append('<option value="'+i+'">'+i+'</option>')
 
   $("#lstToVersets").find('option').remove()
-  for i in [1..option_to_max.max]
-    if i == parseInt option_to_max.max_selected
+  for i in [1..option_to_max[0]]
+    if i == parseInt option_to_max[1]
       $("#lstToVersets").append('<option selected="selected" value="'+i+'">'+i+'</option>')
     else
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
@@ -322,31 +322,41 @@ $(document).ready =>
     lstFromVersets = $("#lstFromVersets").val()
     lstToVersets = $("#lstToVersets").val()
     lstToVersetsCheck = $("#lstToVersetsCheck").val()
+    lstTraduction = $("#lstTraduction").val()
     $("#surah_wrapper").empty()
     $("#surah_wrapper").append('<div class="progress progress-striped active">
                                  <div class="bar" style="width: 100%;"></div>
                                </div>')
     $.ajax({
-     dataType: "json",
      type: "POST",
+     dataType: "html",
      url: "/surahs",
      data: {
       'lstSurahs': lstSurahs,
       'lstRecitators': lstRecitators,
       'lstFromVersets' : lstFromVersets,
       'lstToVersets' : lstToVersets,
-      'lstToVersetsCheck' : lstToVersetsCheck
+      'lstToVersetsCheck' : lstToVersetsCheck,
+      'lstTraduction' : lstTraduction
      }
      success: (data) =>
+       jqObj = jQuery(data);
+       from_verset_selected = jqObj.find("#lstFromVersets").val()
+       to_verset_selected = jqObj.find("#lstToVersets").val()
+       to_verset_max = jqObj.find("#lstToVersets > option:last").val()
+       tab_to_verset_max = []
+       tab_to_verset_max[0] = to_verset_max
+       tab_to_verset_max[1] = to_verset_selected
+
+
        $("#surah_wrapper").empty()
-       regenerate_list_from_to data.from_verset_minimum,data.from_verset_maximum
-       for i in [0...data.versets.length]
-        $("#surah_wrapper").append('<span modal_name="myModal" class="verset">'+data.versets[i].ayahText+'</span>')
-        $("#surah_wrapper").append('<span class="break">('+data.versets[i].ayah_id+')</span>')
+       $("#surah_wrapper").html(jqObj.find("#surah_wrapper").html())
+       regenerate_list_from_to from_verset_selected,tab_to_verset_max
+
        $("#surah_wrapper").fadeIn(1000)
      error: =>
        alert('Error occured');
     })
 
-    return true
+    return false
   return
