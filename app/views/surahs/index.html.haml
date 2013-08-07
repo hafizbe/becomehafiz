@@ -28,7 +28,7 @@
         %div.bar{:style => "width : 0%"}
       %p Traduction
       =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
-  #surah_wrapper{:class => 'span7'}
+  #surah_wrapper.span7.well
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
       %div.verset_wrapper
