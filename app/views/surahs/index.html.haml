@@ -34,7 +34,7 @@
         -if @versets_traduit.nil?
           %span.verset_content{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'none'}=verset.ayahText
         -else
-          %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'top', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
+          %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
 
         %span{:class => 'break'}="("+i.to_s+")"
         -i = i + 1
