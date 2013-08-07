@@ -4,7 +4,6 @@
 #surah_container{:class => 'row-fluid'}
 
   #surah_option_wrapper.span2.well.navbar
-
     %span#lecteur_play Play
     %span.hide.aa test
     %i{:class => "icon-play"}
@@ -28,14 +27,14 @@
         %div.bar{:style => "width : 0%"}
       %p Traduction
       =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
-  #surah_wrapper.span7.well
+  #surah_wrapper_ar.span7.well
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
       %div.verset_wrapper
         -if @versets_traduit.nil?
           %span.verset_content{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'none'}=verset.ayahText
         -else
-          %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'bottom', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
+          %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'top', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
 
         %span{:class => 'break'}="("+i.to_s+")"
         -i = i + 1

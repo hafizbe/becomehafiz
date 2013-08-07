@@ -323,8 +323,8 @@ $(document).ready =>
     lstToVersets = $("#lstToVersets").val()
     lstToVersetsCheck = $("#lstToVersetsCheck").val()
     lstTraduction = $("#lstTraduction").val()
-    $("#surah_wrapper").empty()
-    $("#surah_wrapper").append('<div class="progress progress-striped active">
+    $("#surah_wrapper_ar").empty()
+    $("#surah_wrapper_ar").append('<div class="progress progress-striped active">
                                  <div class="bar" style="width: 100%;"></div>
                                </div>')
     $.ajax({
@@ -349,8 +349,8 @@ $(document).ready =>
        tab_to_verset_max[1] = to_verset_selected
 
 
-       $("#surah_wrapper").empty()
-       $("#surah_wrapper").html(jqObj.find("#surah_wrapper").html())
+       $("#surah_wrapper_ar").empty()
+       $("#surah_wrapper_ar").html(jqObj.find("#surah_wrapper_ar").html())
        regenerate_list_from_to from_verset_selected,tab_to_verset_max
 
        $("#surah_wrapper").fadeIn(1000)

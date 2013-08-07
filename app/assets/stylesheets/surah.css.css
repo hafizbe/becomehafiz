@@ -6,7 +6,7 @@
     cursor: default;
 }
 
-#surah_wrapper{
+#surah_wrapper_ar{
     direction: rtl;
     line-height: 200%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
@@ -99,5 +99,5 @@
 }
 
 .verset_wrapper{
-    display: inline;
+    /*display: inline;*/
 }
