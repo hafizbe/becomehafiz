@@ -8,7 +8,7 @@
 
 #surah_wrapper_ar{
     direction: rtl;
-    line-height: 200%;
+    line-height: 100%%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
     float: left;
 }
@@ -33,7 +33,6 @@
     -webkit-border-radius:10px 0;
     border-radius:10px 0;
 }
-
 .verset_content {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -43,7 +42,8 @@
     padding-right: 10px;
     color: #393939;
     font-size: 50px;
-    line-height: 103px;
+    line-height: 70px;
+
 }
 
 .verset_content:hover
@@ -100,4 +100,6 @@
 
 .verset_wrapper{
     /*display: inline;*/
+    border-bottom: 1px dotted rgb(213, 213, 213);
+    padding-bottom: 10px;
 }

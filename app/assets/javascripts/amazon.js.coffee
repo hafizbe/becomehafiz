@@ -271,28 +271,16 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
 $(document).ready =>
-  $('#surah_wrapper').on('click', '.verset', (e) =>
-    $("#modal-verset").html($(e.currentTarget).text())
-    current_sound = soundManager.getSoundById player.current_file_id
-    unless player.state == "pause"
-       unless  current_sound == null
-        current_sound.pause()
-    modal_name = $(e.currentTarget).attr('modal_name')
-    $("#"+modal_name).modal()
-    $('#closemodal').click =>
-      $("#"+modal_name).modal('hide');
-    $("#"+modal_name).on("hide", =>
-      if player.state == "pause"
-        current_sound = soundManager.getSoundById player.current_file_id
-        current_sound.resume()
-        i = player.current_aya - 1
-        current_offset =   $(".break:contains('("+i+")')").prev()
-        $('body,html').animate(
-          {scrollTop: (current_offset.offset().top - 50)+"px"}, {easing: "swing", duration: 1}
-        )
-      else
+  $('#surah_wrapper_ar').on('click', '.verset_wrapper', (e) =>
 
-    )
+    #e.preventDefault();
+    #$(e.currentTarget).find(".dropdown-toggle").dropdown('toggle')
+    $(e.currentTarget).toggleClass("open")
+
+
+
+    #$("#modal-verset").html($(e.currentTarget).text())
+
   )
 
   #Clic sur play
