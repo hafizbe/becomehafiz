@@ -17,6 +17,8 @@ class SurahsController < ApplicationController
     @langue_selected = choose_traduction
 
     @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
+
+    @size = choose_size
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {:versets => @versets,
@@ -113,6 +115,14 @@ class SurahsController < ApplicationController
      @mapRecitators[recitator.name] = recitator.value
     end
     @mapRecitators
+  end
+
+  def choose_size
+    size = "small"
+    unless params[:lstSize].blank?
+      size  = params[:lstSize]
+    end
+    size
   end
 
 end

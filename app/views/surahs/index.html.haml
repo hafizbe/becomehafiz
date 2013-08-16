@@ -5,9 +5,9 @@
     -@versets.each do |verset|
       %div.verset_wrapper.dropdown
         -if @versets_traduit.nil?
-          %div.verset_content.dropdown-toggle.arab_small{:id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown'}=verset
+          %div{:class => "verset_content dropdown-toggle arab_#{@size}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown'}=verset
         -else
-          %div.verset_content.popover_traduction.arab_small{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
+          %div{:class => "verset_content dropdown-toggle arab_#{@size}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
 
         %ul.dropdown-menu
           %li

@@ -15,7 +15,6 @@
     %label
       To versets
     =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
-    %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
     %div.divider
     %p Loading
     %div.progress.progress-striped.active
@@ -24,4 +23,5 @@
     =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
     %label
       Size
-    =select_tag 'lstSize', options_for_select(["small","medium","large"]), :class => "input-medium"
+    =select_tag 'lstSize', options_for_select(["small","medium","large"], "small"), :class => "input-medium"
+    %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}

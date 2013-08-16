@@ -261,6 +261,19 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
 $(document).ready =>
+
+  $("#surah_wrapper_ar").on('mouseover','.verset_content', (e) =>
+    unless $(e.currentTarget).attr("data-placement") == "none"
+      traduction = $(e.currentTarget).attr("data-traduction")
+      $(e.currentTarget).popover({ title: 'Français', content:  traduction });
+      $(e.currentTarget).popover('show')
+  )
+
+  $("#surah_wrapper_ar").on('mouseout','.verset_content', (e) =>
+    unless $(e.currentTarget).attr("data-placement") == "none"
+      $(e.currentTarget).popover('hide')
+  )
+
   $('#surah_wrapper_ar').on('click', '.verset_wrapper', (e) =>
     #e.preventDefault();
     #$(e.currentTarget).find(".dropdown-toggle").dropdown('toggle')
@@ -292,6 +305,7 @@ $(document).ready =>
     lstToVersets = $("#lstToVersets").val()
     lstToVersetsCheck = $("#lstToVersetsCheck").val()
     lstTraduction = $("#lstTraduction").val()
+    lstSize = $("#lstSize").val()
     $("#surah_wrapper_ar").empty()
     $("#surah_wrapper_ar").append('<div class="progress progress-striped active">
                                  <div class="bar" style="width: 100%;"></div>
@@ -306,7 +320,8 @@ $(document).ready =>
       'lstFromVersets' : lstFromVersets,
       'lstToVersets' : lstToVersets,
       'lstToVersetsCheck' : lstToVersetsCheck,
-      'lstTraduction' : lstTraduction
+      'lstTraduction' : lstTraduction,
+      'lstSize' : lstSize
      }
      success: (data) =>
        jqObj = jQuery(data);
@@ -326,6 +341,8 @@ $(document).ready =>
      error: =>
        alert('Error occured');
     })
+
+
 
     return false
   return
