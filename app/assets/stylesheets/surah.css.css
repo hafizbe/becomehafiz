@@ -41,9 +41,30 @@
     padding-left: 10px;
     padding-right: 10px;
     color: #393939;
-    font-size: 50px;
+
     line-height: 70px;
 
+}
+
+.arab_small
+{
+    font-size: 25px;
+    padding: 0px;
+    line-height: 34px;
+}
+
+.arab_medium
+{
+    font-size: 35px;
+    padding: 0px;
+    line-height: 45px;
+}
+
+.arab_large
+{
+    font-size: 45px;
+    padding: 0px;
+    line-height: 70px;
 }
 
 .verset_content:hover

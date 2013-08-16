@@ -16,14 +16,13 @@ class SurahsController < ApplicationController
     @langues = get_langue
     @langue_selected = choose_traduction
 
-    @versets = Surah.getAyahs @surah_id,@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
+    @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {:versets => @versets,
               :from_verset_maximum => @from_verset_maximum, :from_verset_minimum => @from_verset_minimum }}
     end
   end
-
 
   private
 
@@ -64,7 +63,7 @@ class SurahsController < ApplicationController
   # Retourne hashmap avec le dernier verset ainsi que le dernier verset sélectionné
   def choose_verset_maximum(id_surah)
     h = Hash.new()
-    val = Surah.get_last_ayah_from_surah  id_surah
+    val = Surah.get_last_ayah_from_surah  id_surah_to_string id_surah
     h["max"] = val
     h["max_selected"] = val
     unless params[:lstToVersets].blank? || params[:lstToVersetsCheck] == 0.to_s

@@ -35,7 +35,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
      multiShot: false
      whileloading : =>
        total = s.bytesTotal
-       rapport = (s.bytesLoaded/total) *100
+       rapport = (s.bytesLoaded/total) * 100
        etat = ""
        if rapport <= 33
         etat =  "info progress-striped"
@@ -63,7 +63,6 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
              fichier_xml   = url_fichier[1]
              play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
              return
-
           })
          return
      whileplaying : =>
@@ -71,7 +70,6 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
        if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
          old_marker = current_marker
          current_marker++
-
          if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
            player.next()
            console.log(s.position)
@@ -95,14 +93,11 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
   })
   s = soundManager.getSoundById id
   console.log s
-
   return
 
 # Ouverture d'une récitation
 play_recitation = (num_sourate, recitateur, from_verset, to_verset) =>
-
   ruku_detail = get_ruku_detail()
-
   #Récupération de la vlist pour la sourate
   vlist = get_vlist ruku_detail, num_sourate
   nb_fichier = vlist.length
@@ -164,14 +159,12 @@ get_the_marker = (from_verset, file_of_verset, vlist) =>
        marker = from_verset
      else
        marker = from_verset - vlist[file_of_verset-1]
-
    marker
 
 #Récupère le fichier xml global
 get_ruku_detail =() =>
   url_detail  = 'https://s3.amazonaws.com/hafizbe/RukuDetail.xml'
   docXml = loadXMLDOC url_detail
-
 
 #Charge un fichier Xml en ajax
 loadXMLDOC = (xml_url) =>
@@ -250,10 +243,7 @@ player =
       $("#ayah_#{this.current_aya}").popover('show')
 
 
-get_ayah_number : =>
 #Methode qui regénère la liste déroulante from_verset et to_verset
-
-
 regenerate_list_from_to = (option_from_max, option_to_max) =>
 
   $("#lstFromVersets").find('option').remove()
@@ -272,31 +262,22 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 
 $(document).ready =>
   $('#surah_wrapper_ar').on('click', '.verset_wrapper', (e) =>
-
     #e.preventDefault();
     #$(e.currentTarget).find(".dropdown-toggle").dropdown('toggle')
     $(e.currentTarget).toggleClass("open")
-
-
-
     #$("#modal-verset").html($(e.currentTarget).text())
-
   )
-
   #Clic sur play
   $("#lecteur_play").click =>
     player.current_aya = $("#lstFromVersets").val()
-
     surah_id = $("#lstSurahs").val()
     recitator_name = $("#lstRecitators").val()
     from_verset =  $("#lstFromVersets").val()
     to_verset =  $("#lstToVersets").val()
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
-
   #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
   #$(".verset:first").popover('show')
-
   #Validation du formulaire
   $("#lstSurahsFrm").submit =>
     unless player.current_file_id == null

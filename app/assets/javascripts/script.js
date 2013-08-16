@@ -187,6 +187,14 @@ $(document).ready(function(){
         $("#lstSurahsFrm").submit();
     });
 
+    $('#lstSize').change(function(){
+
+       var current_class = $(".verset_content").attr("class").split(" ")[2]
+       var value_selected = $(this).val()
+        $(".verset_content").removeClass(current_class)
+        $(".verset_content").addClass("arab_"+value_selected)
+    })
+
 
 
 

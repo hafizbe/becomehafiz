@@ -1,0 +1,27 @@
+#surah_option_wrapper.span2.well.navbar
+  %span#lecteur_play Play
+  %span.hide.aa test
+  %i{:class => "icon-play"}
+  =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
+    %label
+      Surahs
+    =select_tag 'lstSurahs', options_for_select(1..114, @surah_id),:class =>"input-medium"
+    %label
+      Recitators
+    =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
+    %label
+      From versets
+    =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum),:class =>"input-small"
+    %label
+      To versets
+    =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
+    %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
+    %div.divider
+    %p Loading
+    %div.progress.progress-striped.active
+      %div.bar{:style => "width : 0%"}
+    %p Traduction
+    =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
+    %label
+      Size
+    =select_tag 'lstSize', options_for_select(["small","medium","large"]), :class => "input-medium"

@@ -1,76 +1,32 @@
 #surah_container{:class => 'row-fluid'}
-
-  #surah_option_wrapper.span2.well.navbar
-    %span#lecteur_play Play
-    %span.hide.aa test
-    %i{:class => "icon-play"}
-    =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
-      %label
-        Surahs
-      =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_id, surah_name|[surah_name,surah_id] }, @surah_id),:class =>"input-medium"
-      %label
-        Recitators
-      =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
-      %label
-        From versets
-      =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum),:class =>"input-small"
-      %label
-        To versets
-      =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
-      %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
-      %div.divider
-      %p Loading
-      %div.progress.progress-striped.active
-        %div.bar{:style => "width : 0%"}
-      %p Traduction
-      =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
-  #surah_wrapper_ar.span7.well
+  = render 'wrapper_options'
+  #surah_wrapper_ar.span8.well
     -i = @from_verset_minimum.to_i
     -@versets.each do |verset|
       %div.verset_wrapper.dropdown
         -if @versets_traduit.nil?
-          %div.verset_content.dropdown-toggle{:id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown'}=verset.ayahText
-          %ul.dropdown-menu
-            %li
-              %a
-                %span.label.label-success
-                  Very good
-            %li
-              %a
-                %span.label.label-warning
-                  Good
-            %li
-              %a
-                %span.label.label-important
-                  Bad
-            %li.divider
-            %li
-              %a
-                %span.label.label-inverse
-                  Repete the verse
+          %div.verset_content.dropdown-toggle.arab_small{:id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown'}=verset
         -else
-          %span.verset_content.popover_traduction{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset.ayahText
-          %ul.dropdown-menu
-            %li
-              %a
-                %span.label.label-success
-                  Very good
-            %li
-              %a
-                %span.label.label-warning
-                  Good
-            %li
-              %a
-                %span.label.label-important
-                  Bad
-            %li.divider
-            %li
-              %a
-                %span.label.label-inverse
-                  Repete the verse
+          %div.verset_content.popover_traduction.arab_small{:id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
+
+        %ul.dropdown-menu
+          %li
+            %a
+              %span.label.label-success
+                Very good
+          %li
+            %a
+              %span.label.label-warning
+                Good
+          %li
+            %a
+              %span.label.label-important
+                Bad
+          %li.divider
+          %li
+            %a
+              %span.label.label-inverse
+                Repete the verse
+
         -i = i + 1
       %span.break.hide="("+i.to_s+")"
-  %div.span3.well
-    %h4{:style =>'text-align : center'}='Panel Configuration'
-
-
