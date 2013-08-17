@@ -6,7 +6,6 @@ class SurahsController < ApplicationController
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
     getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
 
-
     @from_verset_maximum = choose_verset_maximum @surah_id
 
     @recitator_name = choose_recitator_name # On détermine le recitator
@@ -18,7 +17,9 @@ class SurahsController < ApplicationController
 
     @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
 
-    @size = choose_size
+    @size = choose_size #Détermine la taille de la police d'écriture
+
+    @user_signed =  user_signed_in? ? 1 : 0
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {:versets => @versets,

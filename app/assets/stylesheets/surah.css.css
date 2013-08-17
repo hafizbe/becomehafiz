@@ -124,3 +124,10 @@
     border-bottom: 1px dotted rgb(213, 213, 213);
     padding-bottom: 10px;
 }
+
+#surah_wrapper_ar .alert
+{
+    direction: ltr;
+    font-size: 15px;
+    font-family: verdana, arial, helvetica, sans-serif;
+}

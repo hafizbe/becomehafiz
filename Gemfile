@@ -12,6 +12,7 @@ gem 'aws-sdk'
 gem 'soundmanager-rails'
 #gem 'soundmanager2-rails'
 gem 'twitter-bootstrap-rails'
+gem "html2haml"
 
 
 

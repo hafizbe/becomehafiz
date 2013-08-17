@@ -11,20 +11,20 @@
 
         %ul.dropdown-menu
           %li
-            %a
+            =link_to new_user_session_path,'data-connected' => @user_signed do
               %span.label.label-success
                 Very good
           %li
-            %a
+            =link_to new_user_session_path,'data-connected' => @user_signed do
               %span.label.label-warning
                 Good
           %li
-            %a
+            =link_to new_user_session_path,'data-connected' => @user_signed do
               %span.label.label-important
                 Bad
           %li.divider
           %li
-            %a
+            =link_to new_user_session_path,'data-connected' => @user_signed do
               %span.label.label-inverse
                 Repete the verse
 

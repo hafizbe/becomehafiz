@@ -260,7 +260,23 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
     else
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
+
+#afficher fenetre modal
+
 $(document).ready =>
+
+
+  $("#surah_wrapper_ar").on('click','.dropdown-menu a', (e) =>
+   connected = $(e.currentTarget).attr("data-connected")
+   connected = parseInt connected
+   unless connected == 0
+    verset_content = $(e.currentTarget).parent().parent().prev()
+    verset_content.parent().removeClass("open")
+    $("#modal-verset").html(verset_content.text())
+    $("#myModal").modal('show')
+    #Dans ce cas, afficher la fenetre modal
+    return false
+  )
 
   $("#surah_wrapper_ar").on('mouseover','.verset_content', (e) =>
     unless $(e.currentTarget).attr("data-placement") == "none"
@@ -277,11 +293,13 @@ $(document).ready =>
   $('#surah_wrapper_ar').on('click', '.verset_wrapper', (e) =>
     #e.preventDefault();
     #$(e.currentTarget).find(".dropdown-toggle").dropdown('toggle')
+    $('.verset_wrapper').removeClass("open")
     $(e.currentTarget).toggleClass("open")
     #$("#modal-verset").html($(e.currentTarget).text())
   )
   #Clic sur play
   $("#lecteur_play").click =>
+
     player.current_aya = $("#lstFromVersets").val()
     surah_id = $("#lstSurahs").val()
     recitator_name = $("#lstRecitators").val()
@@ -341,8 +359,5 @@ $(document).ready =>
      error: =>
        alert('Error occured');
     })
-
-
-
     return false
   return
