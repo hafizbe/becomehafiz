@@ -131,3 +131,18 @@
     font-size: 15px;
     font-family: verdana, arial, helvetica, sans-serif;
 }
+
+.bad
+{
+   background-color: #BB312F;
+}
+
+.good
+{
+    background-color: #FAFF31;
+}
+
+.very_good
+{
+    background-color: #91BF4B;
+}

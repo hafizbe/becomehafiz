@@ -261,20 +261,38 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
 
+verse_known = (action) =>
+  nom_de_class = null
+  switch action
+    when "1" then nom_de_class = 'very_good'
+    when "2" then nom_de_class = 'good'
+    when "3" then nom_de_class = 'bad'
+  nom_de_class
+
+
+
+
 #afficher fenetre modal
 
 $(document).ready =>
 
-
   $("#surah_wrapper_ar").on('click','.dropdown-menu a', (e) =>
+   action = $(e.currentTarget).attr("data-action")
+   verset_content = $(e.currentTarget).parent().parent().prev()
    connected = $(e.currentTarget).attr("data-connected")
    connected = parseInt connected
-   unless connected == 0
-    verset_content = $(e.currentTarget).parent().parent().prev()
-    verset_content.parent().removeClass("open")
-    $("#modal-verset").html(verset_content.text())
-    $("#myModal").modal('show')
-    #Dans ce cas, afficher la fenetre modal
+   unless connected == 0 #Utilisateur non connecté. Il sera redirigié vers l'url de la balise <a>
+    if action > 0
+      nom_de_classe = verse_known(action)
+      verset_content.addClass(nom_de_classe)
+      verset_content.parent().removeClass("open")
+      return false
+
+    else
+      verset_content.parent().removeClass("open")
+      $("#modal-verset").html(verset_content.text())
+      $("#myModal").modal('show')
+      #Dans ce cas, afficher la fenetre modal
     return false
   )
 
