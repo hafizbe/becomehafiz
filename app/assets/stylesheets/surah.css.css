@@ -28,7 +28,7 @@
 
 .ayah_playing
 {
-    background-color: rgb(196, 236, 189);
+    background-color: rgb(196, 236, 189) !important;
     -moz-border-radius:10px 0;
     -webkit-border-radius:10px 0;
     border-radius:10px 0;

@@ -4,7 +4,7 @@ class SurahsController < ApplicationController
     @from_verset_minimum = choose_verset_minimum
 
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
-    getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
+    @sourates_list = getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
 
     @from_verset_maximum = choose_verset_maximum @surah_id
 
@@ -92,7 +92,7 @@ class SurahsController < ApplicationController
   end
 
   def getNameSurah
-    @sourates_list = Surah.getNameSurah
+    sourates_list = Surah.getNameSurah
   end
 
   def choose_recitator_name
@@ -119,7 +119,7 @@ class SurahsController < ApplicationController
   end
 
   def choose_size
-    size = "small"
+    size = "medium"
     unless params[:lstSize].blank?
       size  = params[:lstSize]
     end
