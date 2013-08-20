@@ -19,7 +19,6 @@
 }
 
 
-
 #lecteur_play:hover
 {
     color: red;
@@ -134,12 +133,12 @@
 
 .bad
 {
-   background-color: #BB312F;
+   background-color: #EEA1A0;
 }
 
 .good
 {
-    background-color: #FAFF31;
+    background-color: #F1F38E;
 }
 
 .very_good

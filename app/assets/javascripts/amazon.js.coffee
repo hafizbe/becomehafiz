@@ -274,13 +274,13 @@ switch_classes = (type_switch, classes_aray) =>
   if type_switch == 'size'
     if 'arab_small' in classes_aray
       retour = 'arab_small'
-      return
+      return retour
     else if 'arab_medium' in classes_aray
       retour = 'arab_medium'
-      return
+      return retour
     else if 'arab_large' in classes_aray
       retour = 'arab_large'
-      return
+      return retour
     return
   else if type_switch == 'color'
     if 'good' in classes_aray
@@ -301,6 +301,14 @@ switch_classes = (type_switch, classes_aray) =>
 
 $(document).ready =>
 
+  $('#lstSize').change((e) =>
+   old_class =  switch_classes 'size',$(".verset_content").attr("class").split(" ")
+   value_selected = $(e.currentTarget).val()
+   $(".verset_content").removeClass(old_class)
+   $(".verset_content").addClass("arab_"+value_selected)
+   return
+  )
+
   $("#surah_wrapper_ar").on('click','.dropdown-menu a', (e) =>
    action = $(e.currentTarget).attr("data-action")
    verset_content = $(e.currentTarget).parent().parent().prev()
@@ -314,12 +322,11 @@ $(document).ready =>
       verset_content.addClass(nom_de_classe)
       verset_content.parent().removeClass("open")
       return false
-
     else
+      #Dans ce cas, afficher la fenetre modal
       verset_content.parent().removeClass("open")
       $("#modal-verset").html(verset_content.text())
       $("#myModal").modal('show')
-      #Dans ce cas, afficher la fenetre modal
     return false
   )
 

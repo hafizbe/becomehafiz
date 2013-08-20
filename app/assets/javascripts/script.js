@@ -186,14 +186,6 @@ $(document).ready(function(){
         $("#lstToVersetsCheck").val(1)
         $("#lstSurahsFrm").submit();
     });
-
-    $('#lstSize').change(function(){
-       var current_class = $(".verset_content").attr("class").split(" ")[$(".verset_content").attr("class").split(" ").length - 1]
-       var value_selected = $(this).val()
-        $(".verset_content").removeClass(current_class)
-        $(".verset_content").addClass("arab_"+value_selected)
-    })
-
     /*$("#lecteur_play").click(function(){
         surah_id = $("#lstSurahs").val();
         recitator_name = $("#lstRecitators").val();

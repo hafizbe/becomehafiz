@@ -1,0 +1,13 @@
+#lstSurahsFrm label{
+    display: inline;
+}
+
+#lstSurahsFrm #progress_loading{
+    width: 200px;
+    display: inline-block;
+    margin: 0px !important;
+}
+
+#lstSurahsFrm #progress_loading div{
+    display: inline;
+}

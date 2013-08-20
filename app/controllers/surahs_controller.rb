@@ -9,7 +9,7 @@ class SurahsController < ApplicationController
     @from_verset_maximum = choose_verset_maximum @surah_id
 
     @recitator_name = choose_recitator_name # On détermine le recitator
-    getNameRecitators # Récupère recitateurs pour la liste déroulante
+    @mapRecitators = getNameRecitators # Récupère recitateurs pour la liste déroulante
 
     @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
     @langues = get_langue
@@ -111,11 +111,11 @@ class SurahsController < ApplicationController
     traduction
   end
   def getNameRecitators
-    @mapRecitators = {}
+    mapRecitators = {}
     Recitator.all.each do |recitator|
-     @mapRecitators[recitator.name] = recitator.value
+     mapRecitators[recitator.name] = recitator.value
     end
-    @mapRecitators
+    mapRecitators
   end
 
   def choose_size

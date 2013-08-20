@@ -1,4 +1,4 @@
-#surah_option_wrapper.span2.well.navbar
+#surah_option_wrapper.span12.well.navbar
   %span#lecteur_play Play
   %span.hide.aa test
   %i{:class => "icon-play"}
@@ -15,11 +15,10 @@
     %label
       To versets
     =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
-    %div.divider
-    %p Loading
-    %div.progress.progress-striped.active
+    %label Loading
+    %div.progress.progress-striped.active#progress_loading
       %div.bar{:style => "width : 0%"}
-    %p Traduction
+    %label Traduction
     =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
     %label
       Size
