@@ -181,6 +181,19 @@ $(document).ready(function(){
     });
     $('#lstTraduction').change(function() {
         $("#lstSurahsFrm").submit();
+        classes_wrapper = $("#surah_wrapper_ar").attr('class').split(" ")
+        classes_wrapper = classes_wrapper[1]
+        classes_wrapper_number = classes_wrapper.substring(classes_wrapper.length-1, classes_wrapper.length)
+        if(classes_wrapper_number == 9)
+        {
+            $("#surah_wrapper_ar").removeClass("span9")
+            $("#surah_wrapper_ar").addClass("span7")
+        }
+        else if (classes_wrapper_number == 7)
+        {
+            $("#surah_wrapper_ar").removeClass("span7")
+            $("#surah_wrapper_ar").addClass("span9")
+        }
     });
     $('#lstToVersets').change(function() {
         $("#lstToVersetsCheck").val(1)
