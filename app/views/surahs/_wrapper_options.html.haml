@@ -8,7 +8,7 @@
     =select_tag 'lstSurahs', options_for_select(1..114, @surah_id),:class =>"input-medium"
     %label
       Recitators
-    =select_tag 'lstRecitators', options_for_select(@mapRecitators.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
+    =select_tag 'lstRecitators', options_for_select(@recitators_list.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
     %label
       From versets
     =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum),:class =>"input-small"

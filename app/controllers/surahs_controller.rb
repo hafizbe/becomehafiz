@@ -1,25 +1,24 @@
 class SurahsController < ApplicationController
   include Amazon
   def index
+    # Selected Value
     @from_verset_minimum = choose_verset_minimum
-
     @surah_id = choose_surahId # On determine l'id de la sourate à afficher
-    @sourates_list = getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
-
     @from_verset_maximum = choose_verset_maximum @surah_id
-
     @recitator_name = choose_recitator_name # On détermine le recitator
-    @mapRecitators = getNameRecitators # Récupère recitateurs pour la liste déroulante
-
-    @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
-    @langues = get_langue
     @langue_selected = choose_traduction
-
-    @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
-
     @size = choose_size #Détermine la taille de la police d'écriture
 
+    # Dropdown Value
+    @sourates_list = getNameSurah # On récupère toutes les sourates à afficher dans la liste déroulante
+    @recitators_list = getNameRecitators # Récupère recitateurs pour la liste déroulante
+    @langues = get_langue
+
+    # Content
+    @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
+    @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
     @user_signed =  user_signed_in? ? 1 : 0
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {:versets => @versets,

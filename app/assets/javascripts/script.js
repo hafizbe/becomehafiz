@@ -171,16 +171,8 @@ function convert_to_millisecond(time)
 }
 
 $(document).ready(function(){
-    // Submit lorsqu'on change l'élement de la liste
-    $('#lstSurahs').change(function() {
-        $("#lstSurahsFrm").submit();
-    });
 
-    $('#lstFromVersets').change(function() {
-        $("#lstSurahsFrm").submit();
-    });
-    $('#lstTraduction').change(function() {
-        $("#lstSurahsFrm").submit();
+    function fix_width_onchange(){
         classes_wrapper = $("#surah_wrapper_ar").attr('class').split(" ")
         classes_wrapper = classes_wrapper[1]
         classes_wrapper_number = classes_wrapper.substring(classes_wrapper.length-1, classes_wrapper.length)
@@ -194,6 +186,20 @@ $(document).ready(function(){
             $("#surah_wrapper_ar").removeClass("span7")
             $("#surah_wrapper_ar").addClass("span9")
         }
+    }
+
+    // Submit lorsqu'on change l'élement de la liste
+    $('#lstSurahs').change(function() {
+        $("#lstSurahsFrm").submit();
+    });
+
+    $('#lstFromVersets').change(function() {
+        $("#lstSurahsFrm").submit();
+    });
+    $('#lstTraduction').change(function() {
+        fix_width_onchange();
+        $("#lstSurahsFrm").submit();
+
     });
     $('#lstToVersets').change(function() {
         $("#lstToVersetsCheck").val(1)
