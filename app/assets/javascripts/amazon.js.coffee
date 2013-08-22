@@ -14,7 +14,7 @@ convertFichier = (num) =>
   if num.length == 1
     num = "0"+num
   num
-# Test 2
+# Test 3
 # Lit le fichier mp3 en s'aidant du fichier xml.      ssh-add -l
 play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitateur, tab_duration, current_marker) =>
   player.next()
