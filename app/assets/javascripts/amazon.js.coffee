@@ -5,6 +5,8 @@ convertSourate = (num) =>
     num = "00#{num}"
   else if num.length == 2
     num = "0#{num}"
+  else
+    num
 
 #Transforme 1 en 01
 convertFichier = (num) =>
