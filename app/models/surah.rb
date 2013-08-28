@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Surah < ActiveRecord::Base
+  #ttestrdfs
   attr_accessible :nb_versets, :position, :name_arabic, :name_phonetic, :type_surah
 
   def self.getAyahs(surah_id,from_verset, to_verset)
