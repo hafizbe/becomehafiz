@@ -29,7 +29,6 @@ class Surah < ActiveRecord::Base
     i = 1
     surahs.each do |surah|
       unless surah.empty?
-        unless Surah.find_by_position i != nil
           nb_versets = surah[1]
           name_arabic = surah[4]
           name_phonetic = surah[5]
@@ -37,7 +36,6 @@ class Surah < ActiveRecord::Base
           the_surah = Surah.new(:nb_versets => nb_versets, :position => i, :name_arabic =>name_arabic, :name_phonetic => name_phonetic, :type_surah => type_surah)
           the_surah.save!
           i = i + 1
-        end
       end
     end
   end

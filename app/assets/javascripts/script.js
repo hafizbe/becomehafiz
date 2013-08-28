@@ -171,7 +171,6 @@ function convert_to_millisecond(time)
 }
 
 $(document).ready(function(){
-    console.log(Quran.surah.detail(15))
 
     function fix_width_onchange(){
         lang  = $('#lstTraduction').val()
