@@ -1,12 +1,10 @@
 Hafiz::Application.routes.draw do
   resources :recitators
 
-
-  resources :books
-
   get "surahs" => "surahs#index"
   post "surahs" => "surahs#index"
   get "pages/home"
+  root :to => 'surahs#index'
 
   #get "surahs/index"
 
@@ -63,7 +61,7 @@ Hafiz::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   #
-    root :to => 'surahs#index'
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

@@ -5,7 +5,7 @@
   =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
     %label
       Surahs
-    =select_tag 'lstSurahs', options_for_select(1..114, @surah_id),:class =>"input-medium"
+    =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_name, surah_value|[surah_name, surah_value] }, @surah_id),:class =>"input-medium"
     %label
       Recitators
     =select_tag 'lstRecitators', options_for_select(@recitators_list.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"

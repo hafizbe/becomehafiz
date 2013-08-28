@@ -91,7 +91,11 @@ class SurahsController < ApplicationController
   end
 
   def getNameSurah
-    sourates_list = Surah.getNameSurah
+    map_surahs = {}
+    Surah.all.each do |surah|
+      map_surahs["#{surah.position} - #{surah.name_phonetic} | #{surah.name_arabic}"] = surah.position
+    end
+    map_surahs
   end
 
   def choose_recitator_name
