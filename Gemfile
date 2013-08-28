@@ -13,6 +13,7 @@ gem 'soundmanager-rails'
 #gem 'soundmanager2-rails'
 gem 'twitter-bootstrap-rails'
 gem "html2haml"
+gem "rake", "0.8.7"
 
 
 
