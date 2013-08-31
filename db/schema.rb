@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828105538) do
+ActiveRecord::Schema.define(:version => 20130828213534) do
+
+  create_table "ayahs", :force => true do |t|
+    t.integer  "position"
+    t.integer  "surah_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -27,8 +34,8 @@ ActiveRecord::Schema.define(:version => 20130828105538) do
   end
 
   create_table "surahs", :force => true do |t|
-    t.integer  "position"
     t.integer  "nb_versets"
+    t.string   "position"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.string   "name_arabic"

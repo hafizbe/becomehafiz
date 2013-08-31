@@ -1,10 +1,13 @@
 class CreateSurahs < ActiveRecord::Migration
   def change
     create_table :surahs do |t|
-      t.integer :position
+      t.integer :id
       t.integer :nb_versets
-
+      t.string :position
       t.timestamps
     end
+  end
+  def self.down
+    drop_table :surahs
   end
 end
