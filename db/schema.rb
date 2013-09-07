@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130828213534) do
+ActiveRecord::Schema.define(:version => 20130831171921) do
+
+  create_table "ayah_relationships", :force => true do |t|
+    t.integer  "ayah_id"
+    t.integer  "user_id"
+    t.integer  "known_value", :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "ayah_relationships", ["ayah_id", "user_id"], :name => "index_ayah_relationships_on_ayah_id_and_user_id", :unique => true
+  add_index "ayah_relationships", ["ayah_id"], :name => "index_ayah_relationships_on_ayah_id"
+  add_index "ayah_relationships", ["user_id"], :name => "index_ayah_relationships_on_user_id"
 
   create_table "ayahs", :force => true do |t|
     t.integer  "position"
