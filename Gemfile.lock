@@ -99,6 +99,8 @@ GEM
     pg (0.15.1)
     pg (0.15.1-x86-mingw32)
     polyglot (0.3.3)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -159,6 +161,7 @@ GEM
     uuidtools (2.1.4)
     warden (1.2.1)
       rack (>= 1.0)
+    webrick (1.3.1)
 
 PLATFORMS
   ruby
@@ -177,6 +180,7 @@ DEPENDENCIES
   meta_request
   mysql2
   pg
+  quiet_assets
   rails (= 3.2.12)
   rake (= 0.8.7)
   sass-rails (~> 3.2.3)
@@ -184,3 +188,4 @@ DEPENDENCIES
   therubyracer (~> 0.10.2)
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  webrick

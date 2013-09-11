@@ -262,43 +262,6 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
     else
       $("#lstToVersets").append('<option value="'+i+'">'+i+'</option>')
 
-
-verse_known = (action) =>
-  nom_de_class = null
-  switch action
-    when "1" then nom_de_class = 'very_good'
-    when "2" then nom_de_class = 'good'
-    when "3" then nom_de_class = 'bad'
-  nom_de_class
-
-switch_classes = (type_switch, classes_aray) =>
-  retour = null
-  if type_switch == 'size'
-    if 'arab_small' in classes_aray
-      retour = 'arab_small'
-      return retour
-    else if 'arab_medium' in classes_aray
-      retour = 'arab_medium'
-      return retour
-    else if 'arab_large' in classes_aray
-      retour = 'arab_large'
-      return retour
-    return
-  else if type_switch == 'color'
-    if 'good' in classes_aray
-      retour = 'good'
-      return  retour
-    else if 'very_good' in classes_aray
-      retour = 'very_good'
-      return retour
-    else if 'bad' in classes_aray
-      retour = 'bad'
-      return retour
-    else if 'none_color' in classes_aray
-      retour = 'none_color'
-      return retour
-  retour
-
 #afficher fenetre modal
 
 $(document).ready =>
@@ -311,26 +274,7 @@ $(document).ready =>
    return
   )
 
-  $("#surah_wrapper_ar").on('click','.dropdown-menu a', (e) =>
-   action = $(e.currentTarget).attr("data-action")
-   verset_content = $(e.currentTarget).parent().parent().prev()
-   connected = $(e.currentTarget).attr("data-connected")
-   connected = parseInt connected
-   unless connected == 0 #Utilisateur non connecté. Il sera redirigié vers l'url de la balise <a>
-    if action > 0
-      nom_de_classe = verse_known(action)
-      class_to_delete = switch_classes 'color',  verset_content.attr('class').split(" ")
-      verset_content.removeClass(class_to_delete)
-      verset_content.addClass(nom_de_classe)
-      verset_content.parent().removeClass("open")
-      return false
-    else
-      #Dans ce cas, afficher la fenetre modal
-      verset_content.parent().removeClass("open")
-      $("#modal-verset").html(verset_content.text())
-      $("#myModal").modal('show')
-    return false
-  )
+
 
   $("#surah_wrapper_ar").on('mouseover','.verset_content', (e) =>
     unless $(e.currentTarget).attr("data-placement") == "none"

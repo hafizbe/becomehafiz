@@ -14,6 +14,7 @@ gem 'soundmanager-rails'
 gem 'twitter-bootstrap-rails'
 gem "html2haml"
 gem "rake", "0.8.7"
+gem "webrick"
 
 
 
@@ -44,6 +45,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
+  gem 'quiet_assets'
 
 end
 

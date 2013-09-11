@@ -1,8 +1,6 @@
 # encoding: utf-8
 class Surah < ActiveRecord::Base
   has_many :ayahs
-
-  #ttestrdfs
   attr_accessible :nb_versets, :position, :name_arabic, :name_phonetic, :type_surah
 
   def self.getAyahs(surah_id,from_verset, to_verset)
@@ -17,6 +15,10 @@ class Surah < ActiveRecord::Base
     end
     tab_content_aya
 
+  end
+
+  def self.get_ayahs_ids(surah_id, start, ending)
+    Surah.find(surah_id).ayahs.where(position:[start.to_i..ending.to_i] ).map(&:id)
   end
 
   def self.get_last_ayah_from_surah(id_surah)

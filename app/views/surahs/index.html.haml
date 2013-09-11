@@ -7,12 +7,13 @@
     -@span_value = 7
   #surah_wrapper_ar.offset2{:class => "span#{@span_value}"}
     -i = @from_verset_minimum.to_i
+    -ayah_id = 0
     -@versets.each do |verset|
       %div.verset_wrapper.dropdown
         -if @versets_traduit.nil?
-          %div{:class => "verset_content dropdown-toggle none_color arab_#{@size}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown'}=verset
+          %div{:class => "verset_content dropdown-toggle none_color arab_#{@size}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}"}=verset
         -else
-          %div{:class => "verset_content dropdown-toggle arab_#{@size}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover', 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
+          %div{:class => "verset_content dropdown-toggle arab_#{@size}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}", 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
 
         %ul.dropdown-menu
           %li
@@ -34,4 +35,5 @@
                 Repete the verse
 
         -i = i + 1
+        -ayah_id = ayah_id + 1
       %span.break.hide="("+i.to_s+")"

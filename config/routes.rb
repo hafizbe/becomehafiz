@@ -9,6 +9,8 @@ Hafiz::Application.routes.draw do
   #get "surahs/index"
 
   devise_for :users
+  post '/users/:id/ayahs' , to: 'ayah_relationships#create'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

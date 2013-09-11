@@ -17,6 +17,7 @@ def index
   # Content
   @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
   @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
+  @ayahs_ids = Surah.get_ayahs_ids @surah_id, @from_verset_minimum, @from_verset_maximum["max"]
   @user_signed =  user_signed_in? ? 1 : 0
 
   respond_to do |format|
