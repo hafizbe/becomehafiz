@@ -5,7 +5,7 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.11'
 gem 'devise'
 gem 'haml'
 gem 'aws-sdk'
@@ -21,6 +21,7 @@ gem "rake", "0.8.7"
 
 
 
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -29,8 +30,8 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-  #gem 'therubyracer', '~> 0.11.0beta1'
-  gem 'therubyracer', '~> 0.10.2'
+  gem 'therubyracer', '~> 0.11.0beta1'
+  #gem 'therubyracer', '~> 0.10.2'
   gem 'less-rails'
   
 

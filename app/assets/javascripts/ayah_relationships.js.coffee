@@ -1,5 +1,4 @@
 $(document).ready =>
-
   # Lorsque l'on clic sur un élément de la liste du verset (Very good, good, bad ...)
   $("#surah_wrapper_ar").on('click','.dropdown-menu a', (e) =>
     verset_content = $(e.currentTarget).parent().parent().prev()
@@ -9,6 +8,11 @@ $(document).ready =>
     user_id = $("#user_id").text()
     unless connected == 0 #Utilisateur non connecté. Il sera redirigié vers l'url de la balise <a>
       if known_value > 0
+        nom_de_classe = verse_known(known_value)
+        class_to_delete = switch_classes 'color',  verset_content.attr('class').split(" ")
+        verset_content.removeClass(class_to_delete)
+        verset_content.addClass(nom_de_classe)
+        verset_content.parent().removeClass("open")
         $.ajax({
          dataType: "json",
          type: "POST",
@@ -18,17 +22,10 @@ $(document).ready =>
          'current_aya_id' : current_aya_id
          }
          success: (data) =>
-           if data
-             nom_de_classe = verse_known(known_value)
-             class_to_delete = switch_classes 'color',  verset_content.attr('class').split(" ")
-             verset_content.removeClass(class_to_delete)
-             verset_content.addClass(nom_de_classe)
-             verset_content.parent().removeClass("open")
-             return false
+
          error: =>
            alert('Error occured');
         })
-
       else
         #Dans ce cas, afficher la fenetre modal
         verset_content.parent().removeClass("open")
@@ -36,7 +33,6 @@ $(document).ready =>
         $("#myModal").modal('show')
       return false
   )
-
 
 verse_known = (action) =>
   nom_de_class = null
