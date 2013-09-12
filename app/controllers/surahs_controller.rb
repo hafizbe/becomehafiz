@@ -157,11 +157,11 @@ end
   def number_to_word(number)
     word = ""
     if number == 1
-      word = "bad"
+      word = "very_good"
     else if number == 2
      word = "good"
      else if number == 3
-          word = "very_good"
+          word = "bad"
         end
       end
     end
