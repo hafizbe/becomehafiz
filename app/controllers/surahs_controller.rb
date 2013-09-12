@@ -18,7 +18,15 @@ def index
   @versets_traduit = get_traduction(id_surah_to_string(@surah_id))
   @versets = Surah.getAyahs id_surah_to_string(@surah_id),@from_verset_minimum.to_i,@from_verset_maximum["max_selected"].to_i
   @ayahs_ids = Surah.get_ayahs_ids @surah_id, @from_verset_minimum, @from_verset_maximum["max"]
-  @user_signed =  user_signed_in? ? 1 : 0
+  if user_signed_in?
+    @map_ayah_known = get_ayah_with_known_classe @surah_id
+    @user_signed = 1
+    @user_id = current_user.id
+  else
+    @map_ayah_known = nil
+    @user_signed = 0
+    @user_id = 0
+  end
 
   respond_to do |format|
     format.html # index.html.erb
@@ -128,6 +136,35 @@ end
       size  = params[:lstSize]
     end
     size
+  end
+
+  def get_ayah_with_known_classe(surah_id)
+
+    range = current_user.ayahs.where(:surah_id => surah_id).map(&:id).join(' ,')
+    ayah_relationships = nil
+    unless range.empty?
+      ayah_relationships = current_user.ayah_relationships.where("ayah_id IN (#{range}) ")
+    end
+    map_ayah_known = {}
+    unless ayah_relationships == nil
+      ayah_relationships.each do |ayah_relationship|
+        map_ayah_known[ayah_relationship.ayah_id] = number_to_word ayah_relationship.known_value
+      end
+    end
+    map_ayah_known
+  end
+
+  def number_to_word(number)
+    word = ""
+    if number == 1
+      word = "bad"
+    else if number == 2
+     word = "good"
+     else if number == 3
+          word = "very_good"
+        end
+      end
+    end
   end
 
 end

@@ -21,4 +21,12 @@ class User < ActiveRecord::Base
   def ayahs_known(surah_id)
    self.ayahs.where("surah_id = ?",surah_id).order("position")
   end
+
+  def ayahs_knowns_per_surah(surah_id)
+    ((self.ayahs.where(:surah_id => surah_id).size.to_f / Surah.find(surah_id).nb_versets.to_f) * 100).round 2
+  end
+
+  def ayahs_knowns_for_quran
+    (self.ayahs.count.to_f / 6236  * 100).round 2
+  end
 end

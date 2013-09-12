@@ -1,3 +1,4 @@
+#user_id.hide=@user_id
 #surah_container{:class => 'row-fluid'}
   = render 'wrapper_options'
   = render 'wrapper_tracker'
@@ -10,10 +11,14 @@
     -ayah_id = 0
     -@versets.each do |verset|
       %div.verset_wrapper.dropdown
-        -if @versets_traduit.nil?
-          %div{:class => "verset_content dropdown-toggle none_color arab_#{@size}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}"}=verset
+        -if @map_ayah_known != nil and @map_ayah_known.key? @ayahs_ids[ayah_id]
+          -@known_class_value = @map_ayah_known[@ayahs_ids[ayah_id]]
         -else
-          %div{:class => "verset_content dropdown-toggle arab_#{@size}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}", 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
+          -@known_class_value = nil
+        -if @versets_traduit.nil?
+          %div{:class => "verset_content dropdown-toggle none_color arab_#{@size} #{@known_class_value}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}"}=verset
+        -else
+          %div{:class => "verset_content dropdown-toggle arab_#{@size} #{@known_class_value}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover','data-ayah-id'=>"#{@ayahs_ids[ayah_id]}", 'data-placement' => 'right', 'data-traduction' => @versets_traduit[i-1]}=verset
 
         %ul.dropdown-menu
           %li

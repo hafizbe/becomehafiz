@@ -6,12 +6,13 @@ $(document).ready =>
     connected = parseInt $(e.currentTarget).attr("data-connected")
     known_value = parseInt $(e.currentTarget).attr("data-action")
     current_aya_id = parseInt $(e.currentTarget).parent().parent().prev().attr("data-ayah-id")
+    user_id = $("#user_id").text()
     unless connected == 0 #Utilisateur non connecté. Il sera redirigié vers l'url de la balise <a>
       if known_value > 0
         $.ajax({
          dataType: "json",
          type: "POST",
-         url: "/users/4/ayahs",
+         url: "/users/#{user_id}/ayahs",
          data: {
          'known_value': known_value,
          'current_aya_id' : current_aya_id
