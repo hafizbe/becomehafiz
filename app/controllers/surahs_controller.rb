@@ -2,6 +2,8 @@ class SurahsController < ApplicationController
 include Amazon
 def index
   # Selected Value
+
+  @form_player_option = FormPlayerOption.new params[:lstSurahs], params[:lstFromVersets], params[:lstToVersets]
   @from_verset_minimum = choose_verset_minimum
   @surah_id = choose_surahId # On determine l'id de la sourate à afficher
   @from_verset_maximum = choose_verset_maximum @surah_id
