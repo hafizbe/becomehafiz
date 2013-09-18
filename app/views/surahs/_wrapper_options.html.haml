@@ -5,22 +5,23 @@
   =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
     %label
       Surahs
-    =select_tag 'lstSurahs', options_for_select(@sourates_list.collect {|surah_name, surah_value|[surah_name, surah_value] }, @surah_id),:class =>"input-medium"
+    =select_tag 'lstSurahs', options_for_select(@form_player_option.sourates_list.collect {|surah_name, surah_value|[surah_name, surah_value] }, @surah_id),:class =>"input-medium"
     %label
       Recitators
-    =select_tag 'lstRecitators', options_for_select(@recitators_list.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
+    =select_tag 'lstRecitators', options_for_select(@form_player_option.recitators_list.collect {|recitator_name, recitator_value|[recitator_value,recitator_name] },@recitator_name),:class =>"input-medium"
     %label
       From versets
-    =select_tag 'lstFromVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_minimum),:class =>"input-small"
+    =select_tag 'lstFromVersets', options_for_select(1..@form_player_option.verset_maximum["max"],@form_player_option.verset_minimum),:class =>"input-small"
     %label
       To versets
-    =select_tag 'lstToVersets', options_for_select(1..@from_verset_maximum["max"],@from_verset_maximum["max_selected"]),:class =>"input-small"
+    =select_tag 'lstToVersets', options_for_select(1..@form_player_option.verset_maximum["max"],@form_player_option.verset_maximum["max_selected"]),:class =>"input-small"
     %label Loading
     %div.progress.progress-striped.active#progress_loading
       %div.bar{:style => "width : 0%"}
+      %div.bar{:style => "width : 0%"}
     %label Traduction
-    =select_tag 'lstTraduction', options_for_select(@langues.collect{|value , key |[key , value]}, @langue_selected),:class =>"input-small"
+    =select_tag 'lstTraduction', options_for_select(@form_player_option.langues.collect{|value , key |[key , value]}, @form_player_option.langue_selected),:class =>"input-small"
     %label
       Size
-    =select_tag 'lstSize', options_for_select(["small","medium","large"], @size), :class => "input-medium"
+    =select_tag 'lstSize', options_for_select(["small","medium","large"], @form_player_option.size), :class => "input-medium"
     %input{:type=>"hidden", :value=>0, :id =>"lstToVersetsCheck" , :name=>"lstToVersetsCheck"}
