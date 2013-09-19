@@ -274,8 +274,6 @@ $(document).ready =>
    return
   )
 
-
-
   $("#surah_wrapper_ar").on('mouseover','.verset_content', (e) =>
     unless $(e.currentTarget).attr("data-placement") == "none"
       traduction = $(e.currentTarget).attr("data-traduction")
@@ -341,6 +339,14 @@ $(document).ready =>
      }
      success: (data) =>
        jqObj = jQuery(data);
+
+       #Refresh of tracker
+       current_surah_label = jqObj.find("#current_surah_label").text()
+       $("#current_surah_label").text(current_surah_label)
+       progress_current_surah =  jqObj.find("#progress_current_surah div").css('width')
+       $("#progress_current_surah div").css('width',progress_current_surah)
+
+
        from_verset_selected = jqObj.find("#lstFromVersets").val()
        to_verset_selected = jqObj.find("#lstToVersets").val()
        to_verset_max = jqObj.find("#lstToVersets > option:last").val()

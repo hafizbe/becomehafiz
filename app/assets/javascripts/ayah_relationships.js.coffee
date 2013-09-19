@@ -37,9 +37,9 @@ $(document).ready =>
 verse_known = (action) =>
   nom_de_class = null
   switch action
-    when 1 then nom_de_class = 'very_good'
+    when 1 then nom_de_class = 'bad'
     when 2 then nom_de_class = 'good'
-    when 3 then nom_de_class = 'bad'
+    when 3 then nom_de_class = 'very_good'
   nom_de_class
 
 switch_classes = (type_switch, classes_aray) =>

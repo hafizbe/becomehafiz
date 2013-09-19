@@ -14,7 +14,6 @@ class Surah < ActiveRecord::Base
       tab_content_aya << verse.text()
     end
     tab_content_aya
-
   end
 
   def self.get_ayahs_ids(surah_id, start, ending)

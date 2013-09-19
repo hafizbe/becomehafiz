@@ -8,7 +8,7 @@
 
 #surah_wrapper_ar{
     direction: rtl;
-    line-height: 100%%;
+    line-height: 100%;
     font-family: "Lateef",PDMS_IslamicFont, _PDMS_IslamicFont, Tahoma, Arial;
     float: left;
 }
@@ -144,4 +144,8 @@
 .very_good
 {
     background-color: #91BF4B;
+}
+
+#alert_user_surah{
+
 }
