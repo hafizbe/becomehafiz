@@ -15,7 +15,7 @@ end
 
   private
     def get_ayah_with_known_classe(surah_id)
-      ayahs = current_user.ayahs.where(:surah_id => surah_id)
+      ayahs = current_user.ayahs.where(:surah_id => surah_id )
       map_ayah_known = {}
       ayahs.each do |ayah|
         map_ayah_known[ayah.id] = number_to_word ayah.known_value
