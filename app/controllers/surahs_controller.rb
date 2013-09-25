@@ -14,19 +14,11 @@ def index
 end
 
   private
-
     def get_ayah_with_known_classe(surah_id)
-
-      range = current_user.ayahs.where(:surah_id => surah_id).map(&:id).join(' ,')
-      ayah_relationships = nil
-      unless range.empty?
-        ayah_relationships = current_user.ayah_relationships.where("ayah_id IN (#{range}) ")
-      end
+      ayahs = current_user.ayahs.where(:surah_id => surah_id)
       map_ayah_known = {}
-      unless ayah_relationships == nil
-        ayah_relationships.each do |ayah_relationship|
-          map_ayah_known[ayah_relationship.ayah_id] = number_to_word ayah_relationship.known_value
-        end
+      ayahs.each do |ayah|
+        map_ayah_known[ayah.id] = number_to_word ayah.known_value
       end
       map_ayah_known
     end

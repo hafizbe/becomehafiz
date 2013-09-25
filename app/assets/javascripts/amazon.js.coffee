@@ -342,6 +342,7 @@ $(document).ready =>
 
        #Refresh of tracker
        current_surah_label = jqObj.find("#current_surah_label").text()
+       console.log data
        $("#current_surah_label").text(current_surah_label)
        progress_current_surah =  jqObj.find("#progress_current_surah div").css('width')
        $("#progress_current_surah div").css('width',progress_current_surah)

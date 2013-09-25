@@ -4,10 +4,16 @@ $(document).ready =>
     verset_content = $(e.currentTarget).parent().parent().prev()
     connected = parseInt $(e.currentTarget).attr("data-connected")
     known_value = parseInt $(e.currentTarget).attr("data-action")
-    current_aya_id = parseInt $(e.currentTarget).parent().parent().prev().attr("data-ayah-id")
+    current_aya= $(e.currentTarget).parent().parent().prev()
+    current_aya_id = parseInt current_aya.attr("data-ayah-id")
     user_id = $("#user_id").text()
     unless connected == 0 #Utilisateur non connecté. Il sera redirigié vers l'url de la balise <a>
       if known_value > 0
+        type_request = null
+        if current_aya.hasClass("bad") or current_aya.hasClass("good") or current_aya.hasClass("very_good")
+          type_request = "PUT"
+        else
+          type_request = "POST"
         nom_de_classe = verse_known(known_value)
         class_to_delete = switch_classes 'color',  verset_content.attr('class').split(" ")
         verset_content.removeClass(class_to_delete)
@@ -15,14 +21,14 @@ $(document).ready =>
         verset_content.parent().removeClass("open")
         $.ajax({
          dataType: "json",
-         type: "POST",
+         type: type_request,
          url: "/users/#{user_id}/ayahs",
          data: {
          'known_value': known_value,
          'current_aya_id' : current_aya_id
          }
          success: (data) =>
-
+          #alert $("#progress_current_surah .bar").css("width")
          error: =>
            alert('Error occured');
         })
@@ -69,3 +75,6 @@ switch_classes = (type_switch, classes_aray) =>
       retour = 'none_color'
       return retour
   retour
+
+  recalcul_width_surah = (new_ayahs_known) =>
+    alert "test"

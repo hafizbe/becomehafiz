@@ -21,7 +21,7 @@ class FormPlayerOption
     @content_surah = ContentSurah.new @surah_id, @verset_minimum, @verset_maximum, @langue_selected
 
     # Dropdown Value
-    @sourates_list = get_name_surahs # On récupère toutes les sourates à afficher dans la liste déroulante
+    @sourates_list  = get_name_surahs # On récupère toutes les sourates à afficher dans la liste déroulante
     @recitators_list = get_name_recitators # Récupère recitateurs pour la liste déroulante
   end
 
@@ -101,6 +101,4 @@ class FormPlayerOption
       hm['es'] = 'Spanish'
       hm
     end
-
-
 end
