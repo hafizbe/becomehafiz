@@ -14,6 +14,7 @@ gem 'soundmanager-rails'
 gem 'twitter-bootstrap-rails'
 gem "html2haml"
 gem "rake", "0.8.7"
+ruby '1.9.2'
 
 
 
