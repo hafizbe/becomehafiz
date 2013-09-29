@@ -18,7 +18,7 @@ end
       ayahs = current_user.ayahs.where(:surah_id => surah_id )
       map_ayah_known = {}
       ayahs.each do |ayah|
-        map_ayah_known[ayah.id] = number_to_word ayah.known_value
+        map_ayah_known[ayah.id] = ayah.known_value
       end
       map_ayah_known
     end
