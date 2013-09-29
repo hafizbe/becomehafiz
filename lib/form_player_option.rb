@@ -14,7 +14,7 @@ class FormPlayerOption
     @langues = get_langue
 
 
-    @map_ayah_known = nil
+    @map_ayah_known = {}
     @user_signed = 0
     @user_id = 0
 

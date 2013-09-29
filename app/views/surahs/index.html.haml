@@ -13,11 +13,9 @@
     -ayah_id = 0
     -@form_player_option.content_surah.ayahs_arabic.each do |verset|
       %div.verset_wrapper.dropdown
-        -if @form_player_option.map_ayah_known != nil and @form_player_option.map_ayah_known.key? @form_player_option.content_surah.ayahs_ids[ayah_id]
+        -if @form_player_option.map_ayah_known.key? @form_player_option.content_surah.ayahs_ids[ayah_id]
           -@known_class_value = @form_player_option.map_ayah_known[@form_player_option.content_surah.ayahs_ids[ayah_id]]
         -else
-          -if @form_player_option.map_ayah_known == nil
-            C'est nul!
           -@known_class_value = nil
         -if @form_player_option.content_surah.ayahs_traducted.nil?
           %div{:class => "verset_content dropdown-toggle none_color arab_#{@form_player_option.size} #{@known_class_value}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown','data-ayah-id'=>"#{@form_player_option.content_surah.ayahs_ids[ayah_id]}"}=verset
