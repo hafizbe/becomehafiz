@@ -24,4 +24,17 @@ include Amazon
       tab_verset
     end
   end
+
+  def self.number_to_word(number)
+    word = ""
+    if number == 1
+      word = "bad"
+    else if number == 2
+      word = "good"
+    else if number == 3
+      word = "very_good"
+        end
+      end
+    end
+  end
 end
