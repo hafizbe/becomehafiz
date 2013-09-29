@@ -18,7 +18,17 @@ end
       ayahs = current_user.ayahs.where(:surah_id => surah_id )
       map_ayah_known = {}
       ayahs.each do |ayah|
-        map_ayah_known[ayah.id] = ContentSurah.number_to_word ayah.known_value
+        word = ""
+        if ayah.known_value.to_i == 1
+          word = "bad"
+        else if ayah.known_value.to_i  == 2
+          word = "good"
+        else if ayah.known_value.to_i  == 3
+          word = "very_good"
+            end
+          end
+        end
+        map_ayah_known[ayah.id] = word
       end
       map_ayah_known
     end
