@@ -15,7 +15,8 @@
       %div.verset_wrapper.dropdown
         -if @form_player_option.map_ayah_known.key? @form_player_option.content_surah.ayahs_ids[ayah_id]
           -@known_class_value = @form_player_option.map_ayah_known[@form_player_option.content_surah.ayahs_ids[ayah_id]]
-          =@known_class_value
+          Je suis la
+          Je suis la
         -else
           -@known_class_value = nil
         -if @form_player_option.content_surah.ayahs_traducted.nil?
