@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :ayah_relationships_attributes, :ayahs_attributes
   # attr_accessible :title, :body
 
-  before_save :reset_authentication_token
+  before_save :reset_authentication_token, :set_name_like_mail, :skip_confirmation!
   has_many :ayah_relationships
   has_many :ayahs, :through => :ayah_relationships,
         :select => "ayahs.*, ayah_relationships.known_value"
@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
 
   def skip_confirmation!
     self.confirmed_at = Time.now
+  end
+
+  def set_name_like_mail
+    self.name = self.email
   end
 
   def ayahs_known(surah_id)
