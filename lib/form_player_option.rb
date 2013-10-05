@@ -70,7 +70,7 @@ class FormPlayerOption
     end
 
     def choose_size(lst_size)
-      size = "medium"
+      size = "large"
       unless lst_size.nil?
         size  = lst_size
       end
