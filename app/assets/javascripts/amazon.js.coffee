@@ -23,6 +23,8 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
   fichier_xml   = url_fichier[1]
   tab_duration  =  get_time_ayah fichier_xml
   player.current_file_id = id
+
+  console.log "L'id courant est #{player.current_file_id}"
   if current_marker == 0
     state_auto_play = true
   else
@@ -243,6 +245,9 @@ player =
     unless $("#ayah_#{this.current_aya}").attr("data-placement") == "none"
       $("#ayah_#{this.current_aya}").popover({ title: 'Français', content:  traduction });
       $("#ayah_#{this.current_aya}").popover('show')
+  pause : ->
+    sound = soundManager.getSoundById(player.current_file_id)
+    sound.pause()
 
 
 #Methode qui regénère la liste déroulante from_verset et to_verset
@@ -342,7 +347,7 @@ $(document).ready =>
       son = soundManager.getSoundById player.current_file_id
       unless typeof son == 'undefined'
         son.destruct()
-        player.restart_loading()
+        player.restart_loading
 
     lstSurahs = $("#lstSurahs").val()
     lstRecitators = $("#lstRecitators").val()
