@@ -28,7 +28,8 @@ $(document).ready =>
          'current_aya_id' : current_aya_id
          }
          success: (data) =>
-          #alert $("#progress_current_surah .bar").css("width")
+           unless data is false
+            resize_surah_known data
          error: =>
            alert('Error occured');
         })
@@ -76,5 +77,6 @@ switch_classes = (type_switch, classes_aray) =>
       return retour
   retour
 
-  recalcul_width_surah = (new_ayahs_known) =>
-    alert "test"
+
+resize_surah_known=(percentage_surah) =>
+  $("#progress_current_surah .bar").css('width', percentage_surah+'%')

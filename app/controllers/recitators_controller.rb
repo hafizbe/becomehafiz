@@ -59,7 +59,7 @@ class RecitatorsController < ApplicationController
     @recitator = Recitator.find(params[:id])
 
     respond_to do |format|
-      if @recitator.update_attributes(params[:recitator])
+      if @recitator.update_attributes (params[:recitator])
         format.html { redirect_to @recitator, notice: 'Recitator was successfully updated.' }
         format.json { head :no_content }
       else

@@ -264,6 +264,37 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 
 #afficher fenetre modal
 
+
+
+
+switch_classes = (type_switch, classes_aray) =>
+  retour = null
+  if type_switch == 'size'
+    if 'arab_small' in classes_aray
+      retour = 'arab_small'
+      return retour
+    else if 'arab_medium' in classes_aray
+      retour = 'arab_medium'
+      return retour
+    else if 'arab_large' in classes_aray
+      retour = 'arab_large'
+      return retour
+    return
+  else if type_switch == 'color'
+    if 'good' in classes_aray
+      retour = 'good'
+      return  retour
+    else if 'very_good' in classes_aray
+      retour = 'very_good'
+      return retour
+    else if 'bad' in classes_aray
+      retour = 'bad'
+      return retour
+    else if 'none_color' in classes_aray
+      retour = 'none_color'
+      return retour
+  retour
+
 $(document).ready =>
 
   $('#lstSize').change((e) =>
