@@ -2,7 +2,6 @@
 #surah_container{:class => 'row-fluid'}
   = render 'wrapper_options'
   = render 'wrapper_tracker'
-  =@form_player_option.sourates_list.key 1
   - if @form_player_option.langue_selected == 'none'
     -@span_value = 9
   - else
