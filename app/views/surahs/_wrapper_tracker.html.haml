@@ -1,0 +1,8 @@
+#tracker_wrapper.well.span2
+ %h4 Tracker Option
+
+ -if user_signed_in?
+  %label{:id => 'current_surah_label'}
+   =@form_player_option.sourates_list.key @form_player_option.surah_id.to_i
+  #progress_current_surah.progress.active
+   %div.bar{:style => "width : #{current_user.ayahs_knowns_per_surah @form_player_option.surah_id}%"}

@@ -80,7 +80,7 @@ class FormPlayerOption
     def get_name_surahs
       map_surahs = {}
       Surah.all.each do |surah|
-        map_surahs["#{surah.position} - #{surah.name_phonetic} | #{surah.name_arabic}"] = surah.position
+        map_surahs["#{surah.position} - #{surah.name_phonetic} | #{surah.name_arabic}"] = surah.position.to_i
       end
       map_surahs
     end
