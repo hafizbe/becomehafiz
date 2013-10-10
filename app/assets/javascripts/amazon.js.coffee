@@ -63,7 +63,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
           onfinish : =>
            if (fichier_temp + 1) <= nb_fichier
              console.log "Terminé !"
-             url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+             url_fichier = get_url_fichier_quran_explorer convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
              fichier_xml   = url_fichier[1]
              play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
              return
@@ -81,7 +81,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
      onfinish : =>
        if (fichier_temp + 1) <= nb_fichier
          console.log "Terminé !"
-         url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+         url_fichier = get_url_fichier_quran_explorer convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
          fichier_xml   = url_fichier[1]
          play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
          return
@@ -108,7 +108,7 @@ play_recitation = (num_sourate, recitateur, from_verset, to_verset) =>
   file_of_verset = get_file_for_verset vlist, from_verset
   marker = get_the_marker from_verset, file_of_verset, vlist
   console.log "Marker => #{marker}"
-  url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier file_of_verset
+  url_fichier = get_url_fichier_quran_explorer convertSourate(num_sourate) , recitateur, convertFichier file_of_verset
   fichier_xml = url_fichier[1]
   tab_duration  =  get_time_ayah fichier_xml
   play_fichier url_fichier,file_of_verset,file_of_verset, nb_fichier, num_sourate, recitateur, tab_duration, marker
@@ -214,6 +214,12 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
      alert('Error occured');
    })
   return surah
+
+get_url_fichier_quran_explorer = (numSourate, recitateur, numero_fichier) =>
+  surah = new Array(2)
+  surah[0] = "http://www.quranexplorer.com/quran/Split-Audio/Script/#{recitateur}/#{numSourate}-#{numero_fichier}.mp3"
+  surah[1] = "http://www.quranexplorer.com/quran/Split-Audio/Script/#{recitateur}/#{numSourate}-#{numero_fichier}.xml"
+  surah
 
 player =
   current_aya : $("#lstFromVersets").val()
