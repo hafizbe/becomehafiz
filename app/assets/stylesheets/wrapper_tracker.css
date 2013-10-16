@@ -8,4 +8,89 @@
     text-align: center;
     border-bottom: 1px solid rgb(224, 224, 224);
     padding-bottom: 20px;
+    border-top: 1px solid rgb(224, 224, 224);
+    padding-top: 20px;
+}
+
+.play_border {
+    margin:5px;
+    border: 2px solid rgba(0,0,0,0.7);
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+.play_border:hover{
+    border-color: transparent;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+}
+.play_border:hover .play_button{
+    border-left: 10px solid rgba(0,0,0,0.5);
+}
+.play_border:active,.play_border:focus{
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 5.play_button:hoverpx 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.2);
+}
+.play_button {
+    position:relative;
+    top: 10px;
+    left: 40%;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid rgba(0,0,0,0.8);
+}
+
+.play_border .play-icon{
+    background-image: url(/assets/icon-play.png);
+    width: 24px;
+    display: block;
+    height: 24px;
+    float: left;
+    margin-left: 9px;
+    margin-top: 8px;
+}
+
+.play_border .stop-icon{
+    background-image: url(/assets/icon-stop.png);
+    width: 24px;
+    display: block;
+    height: 24px;
+    float: left;
+    margin-left: 9px;
+    margin-top: 8px;
+}
+
+.play_border .pause-icon{
+    background-image: url(/assets/icon-pause.png);
+    width: 24px;
+    display: block;
+    height: 24px;
+    float: left;
+    margin-left: 9px;
+    margin-top: 8px;
+}
+
+#player{
+
+}
+
+#player .icons{
+    margin-left: 26px;
+    margin-bottom: 10px;
 }

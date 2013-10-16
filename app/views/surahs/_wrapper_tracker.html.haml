@@ -1,5 +1,16 @@
+
 #tracker_wrapper.well.span2
+ #player
+  .icons
+   .play_border
+    .play-icon
+   .play_border
+    .stop-icon
+  %div.progress.progress-striped.active#progress_loading
+   %div.bar{:style => "width : 0%"}
+
  %h4 Tracker Option
+
 
  -if user_signed_in?
   %label{:id => 'current_surah_label'}
