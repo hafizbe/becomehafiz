@@ -49,10 +49,10 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
               etat = "warning progress-striped"
          else if rapport == 100
             etat = "danger"
-       classe = $("#surah_option_wrapper .progress").attr("class").split(" ")[1]
-       $("#surah_option_wrapper .progress").removeClass(classe)
-       $("#surah_option_wrapper .progress").addClass("progress-"+etat)
-       $("#surah_option_wrapper .progress .bar").css("width",rapport+"%")
+       classe = $("#tracker_wrapper .progress").attr("class").split(" ")[1]
+       $("#tracker_wrapper #progress_loading").removeClass(classe)
+       $("#tracker_wrapper #progress_loading").addClass("progress-"+etat)
+       $("#tracker_wrapper #progress_loading .bar").css("width",rapport+"%")
        return
      onload : =>
        console.log "Le son est chargé ! Etat => #{s.playState}"
@@ -269,9 +269,6 @@ regenerate_list_from_to = (option_from_max, option_to_max) =>
 
 #afficher fenetre modal
 
-
-
-
 switch_classes = (type_switch, classes_aray) =>
   retour = null
   if type_switch == 'size'
@@ -330,8 +327,10 @@ $(document).ready =>
     #$("#modal-verset").html($(e.currentTarget).text())
   )
   #Clic sur play
-  $("#lecteur_play").click =>
-
+  $("#tracker_wrapper").on('click','.play-icon', (e) =>
+    player_icon = $(".play-icon").first()
+    player_icon.remove()
+    $(".play_border").first().append("<div class='pause-icon'></div>")
     player.current_aya = $("#lstFromVersets").val()
     surah_id = $("#lstSurahs").val()
     recitator_name = $("#lstRecitators").val()
@@ -339,6 +338,7 @@ $(document).ready =>
     to_verset =  $("#lstToVersets").val()
     play_recitation surah_id, recitator_name, from_verset, to_verset
     return false
+  )
   #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
   #$(".verset:first").popover('show')
   #Validation du formulaire
@@ -350,6 +350,8 @@ $(document).ready =>
         player.restart_loading
 
     lstSurahs = $("#lstSurahs").val()
+    #testrdqsdqs
+
     lstRecitators = $("#lstRecitators").val()
     lstFromVersets = $("#lstFromVersets").val()
     lstToVersets = $("#lstToVersets").val()
@@ -375,13 +377,11 @@ $(document).ready =>
      }
      success: (data) =>
        jqObj = jQuery(data);
-
        #Refresh of tracker
        current_surah_label = jqObj.find("#current_surah_label").text()
        $("#current_surah_label").text(current_surah_label)
        progress_current_surah =  jqObj.find("#progress_current_surah div").css('width')
        $("#progress_current_surah div").css('width',progress_current_surah)
-
 
        from_verset_selected = jqObj.find("#lstFromVersets").val()
        to_verset_selected = jqObj.find("#lstToVersets").val()
@@ -389,7 +389,6 @@ $(document).ready =>
        tab_to_verset_max = []
        tab_to_verset_max[0] = to_verset_max
        tab_to_verset_max[1] = to_verset_selected
-
 
        $("#surah_wrapper_ar").empty()
        $("#surah_wrapper_ar").html(jqObj.find("#surah_wrapper_ar").html())
@@ -400,4 +399,10 @@ $(document).ready =>
        alert('Error occured');
     })
     return false
+
+  $("#tracker_wrapper").on('click','.pause-icon', (e) =>
+    player_icon = $(".pause-icon").first()
+    player_icon.remove()
+    $(".play_border").first().append("<div class='play-icon'></div>")
+  )
   return

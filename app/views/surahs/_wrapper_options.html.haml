@@ -1,7 +1,4 @@
 #surah_option_wrapper.span12.well.navbar
-  %span#lecteur_play Play
-  %span.hide.aa test
-  %i{:class => "icon-play"}
   =form_tag('/surahs', :method => 'post', :multipart => true, :id => 'lstSurahsFrm') do
     %label
       Surahs
@@ -17,7 +14,6 @@
     =select_tag 'lstToVersets', options_for_select(1..@form_player_option.verset_maximum["max"],@form_player_option.verset_maximum["max_selected"]),:class =>"input-small"
     %label Loading
     %div.progress.progress-striped.active#progress_loading
-      %div.bar{:style => "width : 0%"}
       %div.bar{:style => "width : 0%"}
     %label Traduction
     =select_tag 'lstTraduction', options_for_select(@form_player_option.langues.collect{|value , key |[key , value]}, @form_player_option.langue_selected),:class =>"input-small"
