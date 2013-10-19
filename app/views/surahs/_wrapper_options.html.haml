@@ -13,8 +13,6 @@
       To versets
     =select_tag 'lstToVersets', options_for_select(1..@form_player_option.verset_maximum["max"],@form_player_option.verset_maximum["max_selected"]),:class =>"input-small"
     %label Loading
-    %div.progress.progress-striped.active#progress_loading
-      %div.bar{:style => "width : 0%"}
     %label Traduction
     =select_tag 'lstTraduction', options_for_select(@form_player_option.langues.collect{|value , key |[key , value]}, @form_player_option.langue_selected),:class =>"input-small"
     %label

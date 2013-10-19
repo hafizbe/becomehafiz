@@ -246,9 +246,24 @@ player =
       $("#ayah_#{this.current_aya}").popover({ title: 'Français', content:  traduction });
       $("#ayah_#{this.current_aya}").popover('show')
   pause : ->
-    sound = soundManager.getSoundById(player.current_file_id)
-    sound.pause()
+      sound = soundManager.getSoundById(player.current_file_id)
+      sound.pause()
+  resume : ->
+      sound = soundManager.getSoundById(player.current_file_id)
+      sound.resume()
+  stop : ->
+    if son_exist()
+      sound = soundManager.getSoundById(player.current_file_id)
+      sound.stop()
 
+
+son_exist = ->
+  exist = false
+  unless player.current_file_id == null
+    sound = soundManager.getSoundById player.current_file_id
+    unless typeof sound == 'undefined'
+      exist = true
+  exist
 
 #Methode qui regénère la liste déroulante from_verset et to_verset
 regenerate_list_from_to = (option_from_max, option_to_max) =>
@@ -326,19 +341,7 @@ $(document).ready =>
     $(e.currentTarget).toggleClass("open")
     #$("#modal-verset").html($(e.currentTarget).text())
   )
-  #Clic sur play
-  $("#tracker_wrapper").on('click','.play-icon', (e) =>
-    player_icon = $(".play-icon").first()
-    player_icon.remove()
-    $(".play_border").first().append("<div class='pause-icon'></div>")
-    player.current_aya = $("#lstFromVersets").val()
-    surah_id = $("#lstSurahs").val()
-    recitator_name = $("#lstRecitators").val()
-    from_verset =  $("#lstFromVersets").val()
-    to_verset =  $("#lstToVersets").val()
-    play_recitation surah_id, recitator_name, from_verset, to_verset
-    return false
-  )
+
   #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
   #$(".verset:first").popover('show')
   #Validation du formulaire
@@ -400,9 +403,42 @@ $(document).ready =>
     })
     return false
 
+  #Clic sur play
+  $("#tracker_wrapper").on('click','.play-icon', (e) =>
+    player_icon = $(".play-icon").first()
+    player_icon.remove()
+    $(".play_border").first().append("<div class='pause-icon'></div>")
+    player.current_aya = $("#lstFromVersets").val()
+    surah_id = $("#lstSurahs").val()
+    recitator_name = $("#lstRecitators").val()
+    from_verset =  $("#lstFromVersets").val()
+    to_verset =  $("#lstToVersets").val()
+    play_recitation surah_id, recitator_name, from_verset, to_verset
+    return false
+  )
+
+  #Click sur pause
   $("#tracker_wrapper").on('click','.pause-icon', (e) =>
+    player.pause()
     player_icon = $(".pause-icon").first()
     player_icon.remove()
-    $(".play_border").first().append("<div class='play-icon'></div>")
+    $(".play_border").first().append("<div class='play-icon-resume'></div>")
+  )
+
+  #Click sur stop
+  $("#tracker_wrapper").on('click','.stop-icon', (e) =>
+    if son_exist()
+      player.stop()
+      player_icon = $(".pause-icon").first()
+      player_icon.remove()
+      $(".play_border").first().append("<div class='play-icon'></div>")
+  )
+
+  #Click sur resume
+  $("#tracker_wrapper").on('click','.play-icon-resume', (e) =>
+    player.resume()
+    player_icon = $(".play-icon-resume").first()
+    player_icon.remove()
+    $(".play_border").first().append("<div class='pause-icon'></div>")
   )
   return

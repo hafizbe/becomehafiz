@@ -66,6 +66,16 @@
     margin-top: 8px;
 }
 
+.play_border .play-icon-resume{
+    background-image: url(/assets/icon-play.png);
+    width: 24px;
+    display: block;
+    height: 24px;
+    float: left;
+    margin-left: 9px;
+    margin-top: 8px;
+}
+
 .play_border .stop-icon{
     background-image: url(/assets/icon-stop.png);
     width: 24px;
