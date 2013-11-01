@@ -32,12 +32,6 @@ ActiveRecord::Schema.define(:version => 20130831171921) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "books", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "recitators", :force => true do |t|
     t.string   "name"
     t.string   "value"
@@ -48,11 +42,11 @@ ActiveRecord::Schema.define(:version => 20130831171921) do
   create_table "surahs", :force => true do |t|
     t.integer  "nb_versets"
     t.string   "position"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
     t.string   "name_arabic"
     t.string   "name_phonetic"
     t.string   "type_surah"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

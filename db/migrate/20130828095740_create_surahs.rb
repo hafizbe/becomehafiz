@@ -4,6 +4,9 @@ class CreateSurahs < ActiveRecord::Migration
       t.integer :id
       t.integer :nb_versets
       t.string :position
+      t.string :name_arabic
+      t.string :name_phonetic
+      t.string :type_surah
       t.timestamps
     end
   end
