@@ -14,8 +14,14 @@ convertFichier = (num) =>
   if num.length == 1
     num = "0"+num
   num
-# Test 3
-# Lit le fichier mp3 en s'aidant du fichier xml.      ssh-add -l
+
+
+#Récupère le son par son id
+get_sound_by_id = (sound_id) =>
+  sound = soundManager.getSoundById sound_id
+
+
+# Lit le fichier mp3 en s'aidant du fichier xml.
 play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitateur, tab_duration, current_marker) =>
   player.next()
   current_marker = parseInt current_marker
@@ -29,75 +35,79 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
     state_auto_play = true
   else
     state_auto_play = false
-  soundManager.createSound({
-     id: id
-     url: fichier_mp3,
-     stream: true
-     autoLoad: true
-     autoPlay: state_auto_play
-     multiShotEvents: false
-     multiShot: false
-     whileloading : =>
-       total = s.bytesTotal
-       rapport = (s.bytesLoaded/total) * 100
-       etat = ""
-       if rapport <= 33
-        etat =  "info progress-striped"
-       else if rapport <= 66
-        etat = "success progress-striped"
-       else if rapport <= 99
-              etat = "warning progress-striped"
-         else if rapport == 100
-            etat = "danger"
-       classe = $("#tracker_wrapper .progress").attr("class").split(" ")[1]
-       $("#tracker_wrapper #progress_loading").removeClass(classe)
-       $("#tracker_wrapper #progress_loading").addClass("progress-"+etat)
-       $("#tracker_wrapper #progress_loading .bar").css("width",rapport+"%")
-       return
-     onload : =>
-       console.log "Le son est chargé ! Etat => #{s.playState}"
-       if s.playState == 0
-         s.play({
-          position:  convert_to_milliseconde tab_duration[current_marker]
-          multiShotEvents: true
-          onfinish : =>
-           if (fichier_temp + 1) <= nb_fichier
-             console.log "Terminé !"
-             url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
-             fichier_xml   = url_fichier[1]
-             play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
-             return
-          })
+  if son_exist player.current_file_id
+    sound = get_sound_by_id id
+    sound.play()
+  else
+    soundManager.createSound({
+       id: id
+       url: fichier_mp3,
+       stream: true
+       autoLoad: true
+       autoPlay: state_auto_play
+       multiShotEvents: false
+       multiShot: false
+       whileloading : =>
+         total = s.bytesTotal
+         rapport = (s.bytesLoaded/total) * 100
+         etat = ""
+         if rapport <= 33
+          etat =  "info progress-striped"
+         else if rapport <= 66
+          etat = "success progress-striped"
+         else if rapport <= 99
+                etat = "warning progress-striped"
+           else if rapport == 100
+              etat = "danger"
+         classe = $("#tracker_wrapper .progress").attr("class").split(" ")[1]
+         $("#tracker_wrapper #progress_loading").removeClass(classe)
+         $("#tracker_wrapper #progress_loading").addClass("progress-"+etat)
+         $("#tracker_wrapper #progress_loading .bar").css("width",rapport+"%")
          return
-     whileplaying : =>
-       console.log s.position
-       if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
-         old_marker = current_marker
-         current_marker++
-         if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
-           player.next()
-           console.log(s.position)
-       return
-     onfinish : =>
-       if (fichier_temp + 1) <= nb_fichier
-         console.log "Terminé !"
-         url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
-         fichier_xml   = url_fichier[1]
-         play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
+       onload : =>
+         console.log "Le son est chargé ! Etat => #{s.playState}"
+         if s.playState == 0
+           s.play({
+            position:  convert_to_milliseconde tab_duration[current_marker]
+            multiShotEvents: true
+            onfinish : =>
+             if (fichier_temp + 1) <= nb_fichier
+               console.log "Terminé !"
+               url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+               fichier_xml   = url_fichier[1]
+               play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
+               return
+            })
+           return
+       whileplaying : =>
+         console.log s.position
+         if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
+           old_marker = current_marker
+           current_marker++
+           if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
+             player.next()
+             console.log(s.position)
          return
-     onplay : =>
-       player.state = "play"
-     onstop : =>
-       player.state = "stop"
-     onpause: =>
-       player.state = "pause"
-     onresume: =>
-       player.state = "resume"
+       onfinish : =>
+         if (fichier_temp + 1) <= nb_fichier
+           console.log "Terminé !"
+           url_fichier = get_url_fichier convertSourate(num_sourate) , recitateur, convertFichier fichier_temp + 1
+           fichier_xml   = url_fichier[1]
+           play_fichier url_fichier, id+1 ,fichier_temp + 1, nb_fichier, num_sourate, recitateur, tab_duration, 0
+           return
+       onplay : =>
+         player.state = "play"
+       onstop : =>
+         player.state = "stop"
+       onpause: =>
+         player.state = "pause"
+       onresume: =>
+         player.state = "resume"
 
-  })
-  s = soundManager.getSoundById id
-  console.log s
-  return
+    })
+    s = soundManager.getSoundById id
+    console.log s
+    return
 
 # Ouverture d'une récitation
 play_recitation = (num_sourate, recitateur, from_verset, to_verset) =>
@@ -257,7 +267,15 @@ player =
       sound.stop()
 
 
+
 son_exist = ->
+  exist = false
+  unless player.current_file_id == null
+    sound = soundManager.getSoundById player.current_file_id
+    unless typeof sound == 'undefined'
+      exist = true
+  exist
+son_exist = (sound_id) =>
   exist = false
   unless player.current_file_id == null
     sound = soundManager.getSoundById player.current_file_id
@@ -314,6 +332,8 @@ switch_classes = (type_switch, classes_aray) =>
 
 $(document).ready =>
 
+
+
   $('#lstSize').change((e) =>
    old_class =  switch_classes 'size',$(".verset_content").attr("class").split(" ")
    value_selected = $(e.currentTarget).val()
@@ -334,18 +354,11 @@ $(document).ready =>
       $(e.currentTarget).popover('hide')
   )
 
-  $('#surah_wrapper_ar').on('click', '.verset_wrapper', (e) =>
-    #e.preventDefault();
-    #$(e.currentTarget).find(".dropdown-toggle").dropdown('toggle')
-    $('.verset_wrapper').removeClass("open")
-    $(e.currentTarget).toggleClass("open")
-    #$("#modal-verset").html($(e.currentTarget).text())
-  )
-
+  #$('.dropdown-toggle').dropdown()
   #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
   #$(".verset:first").popover('show')
-  #Validation du formulaire
-  $("#lstSurahsFrm").submit =>
+  $("#surah_option_wrapper").on('submit','#lstSurahsFrm', (e) =>
+
     unless player.current_file_id == null
       son = soundManager.getSoundById player.current_file_id
       unless typeof son == 'undefined'
@@ -363,45 +376,52 @@ $(document).ready =>
     lstSize = $("#lstSize").val()
     $("#surah_wrapper_ar").empty()
     $("#surah_wrapper_ar").append('<div class="progress progress-striped active">
-                                 <div class="bar" style="width: 100%;"></div>
-                               </div>')
+                                     <div class="bar" style="width: 100%;"></div>
+                                   </div>')
     $.ajax({
-     type: "POST",
-     dataType: "html",
-     url: "/surahs",
-     data: {
-      'lstSurahs': lstSurahs,
-      'lstRecitators': lstRecitators,
-      'lstFromVersets' : lstFromVersets,
-      'lstToVersets' : lstToVersets,
-      'lstToVersetsCheck' : lstToVersetsCheck,
-      'lstTraduction' : lstTraduction,
-      'lstSize' : lstSize
-     }
-     success: (data) =>
-       jqObj = jQuery(data);
-       #Refresh of tracker
-       current_surah_label = jqObj.find("#current_surah_label").text()
-       $("#current_surah_label").text(current_surah_label)
-       progress_current_surah =  jqObj.find("#progress_current_surah div").css('width')
-       $("#progress_current_surah div").css('width',progress_current_surah)
+      type: "POST",
+      dataType: "html",
+      url: "/surahs",
+      data: {
+        'lstSurahs': lstSurahs,
+        'lstRecitators': lstRecitators,
+        'lstFromVersets' : lstFromVersets,
+        'lstToVersets' : lstToVersets,
+        'lstToVersetsCheck' : lstToVersetsCheck,
+        'lstTraduction' : lstTraduction,
+        'lstSize' : lstSize
+      }
+      success: (data) =>
+        jqObj = jQuery(data);
+        #Refresh of tracker
+        current_surah_label = jqObj.find("#current_surah_label").text()
+        $("#current_surah_label").text(current_surah_label)
+        progress_current_surah =  jqObj.find("#progress_current_surah div").css('width')
+        $("#progress_current_surah div").css('width',progress_current_surah)
 
-       from_verset_selected = jqObj.find("#lstFromVersets").val()
-       to_verset_selected = jqObj.find("#lstToVersets").val()
-       to_verset_max = jqObj.find("#lstToVersets > option:last").val()
-       tab_to_verset_max = []
-       tab_to_verset_max[0] = to_verset_max
-       tab_to_verset_max[1] = to_verset_selected
+        from_verset_selected = jqObj.find("#lstFromVersets").val()
+        to_verset_selected = jqObj.find("#lstToVersets").val()
+        to_verset_max = jqObj.find("#lstToVersets > option:last").val()
+        tab_to_verset_max = []
+        tab_to_verset_max[0] = to_verset_max
+        tab_to_verset_max[1] = to_verset_selected
 
-       $("#surah_wrapper_ar").empty()
-       $("#surah_wrapper_ar").html(jqObj.find("#surah_wrapper_ar").html())
-       regenerate_list_from_to from_verset_selected,tab_to_verset_max
+        $("#surah_wrapper_ar").empty()
+        $("#surah_wrapper_ar").html(jqObj.find("#surah_wrapper_ar").html())
+        regenerate_list_from_to from_verset_selected,tab_to_verset_max
 
-       $("#surah_wrapper").fadeIn(1000)
-     error: =>
-       alert('Error occured');
+        $("#surah_wrapper").fadeIn(1000)
+        #$('.verset_wrapper').removeClass("open")
+      error: =>
+        alert('Error occured');
     })
     return false
+
+  )
+
+  #Validation du formulaire
+  $("#lstSurahsFrm").submit =>
+
 
   #Clic sur play
   $("#tracker_wrapper").on('click','.play-icon', (e) =>

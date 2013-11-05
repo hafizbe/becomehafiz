@@ -14,6 +14,19 @@
 
  -if user_signed_in?
   %label{:id => 'current_surah_label'}
-   =@form_player_option.sourates_list.key @form_player_option.surah_id
+   =@form_player_option.sourates_list.key @form_player_option.surah_id.to_i
   #progress_current_surah.progress.progress-success.progress-striped
    %div.bar{:style => "width : #{current_user.ayahs_knowns_per_surah @form_player_option.surah_id}%"}
+  #accordion2.accordion
+   .accordion-group
+    .accordion-heading
+     %a.accordion-toggle{'data-toggle'=>'collapse', 'data-parent' => "#accordion2",  :href=> "#collapseOne"}
+      Actions about this sura
+     #collapseOne.accordion-body.collapse
+      .accordion-inner
+       %btn.btn.btn-success
+        I know all
+       %btn.btn.btn-warning
+        I know approximately
+       %btn.btn.btn-danger
+        I do not almost know

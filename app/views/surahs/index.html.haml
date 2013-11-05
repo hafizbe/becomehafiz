@@ -18,9 +18,9 @@
         -else
           -@known_class_value = nil
         -if @form_player_option.content_surah.ayahs_traducted.nil?
-          %div{:class => "verset_content dropdown-toggle none_color arab_#{@form_player_option.size} #{@known_class_value}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toogle'=>'dropdown','data-ayah-id'=>"#{@form_player_option.content_surah.ayahs_ids[ayah_id]}"}=verset
+          %div{:class => "verset_content dropdown-toggle none_color arab_#{@form_player_option.size} #{@known_class_value}", :id => "ayah_#{i}",  'data-placement' => 'none','data-toggle'=>'dropdown','data-ayah-id'=>"#{@form_player_option.content_surah.ayahs_ids[ayah_id]}"}=verset
         -else
-          %div{:class => "verset_content dropdown-toggle arab_#{@form_player_option.size} #{@known_class_value}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover','data-ayah-id'=>"#{@form_player_option.content_surah.ayahs_ids[ayah_id]}", 'data-placement' => 'right', 'data-traduction' => @form_player_option.content_surah.ayahs_traducted[i-1]}=verset
+          %div{:class => "verset_content dropdown-toggle arab_#{@form_player_option.size} #{@known_class_value}", :id => "ayah_#{i}",'modal_name' =>'myModal' ,'rel' => 'popover','data-toggle'=>'dropdown','data-ayah-id'=>"#{@form_player_option.content_surah.ayahs_ids[ayah_id]}", 'data-placement' => 'right', 'data-traduction' => @form_player_option.content_surah.ayahs_traducted[i-1]}=verset
 
         %ul.dropdown-menu
           %li
