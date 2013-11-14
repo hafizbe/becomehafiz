@@ -32,6 +32,9 @@
           %li
             =link_to new_user_session_path,'data-connected' => @form_player_option.user_signed,'data-action' => '1' do
               %span.label.label-important Bad
+          %li
+            =link_to new_user_session_path,'data-connected' => @form_player_option.user_signed,'data-action' => '4' do
+              %span.label.label-default Cancel
           %li.divider
           %li
             =link_to new_user_session_path,'data-connected' => @form_player_option.user_signed,'data-action' => '0' do

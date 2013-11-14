@@ -24,19 +24,21 @@ get_sound_by_id = (sound_id) =>
 # Lit le fichier mp3 en s'aidant du fichier xml.
 play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitateur, tab_duration, current_marker) =>
   player.next()
-  current_marker = parseInt current_marker
+  player.current_marker = parseInt current_marker
   fichier_mp3   = url_fichier[0]
   fichier_xml   = url_fichier[1]
   tab_duration  =  get_time_ayah fichier_xml
   player.current_file_id = id
 
   console.log "L'id courant est #{player.current_file_id}"
-  if current_marker == 0
+  if player.current_marker == 0
     state_auto_play = true
   else
     state_auto_play = false
   if son_exist player.current_file_id
     sound = get_sound_by_id id
+    sound.setPosition(convert_to_milliseconde tab_duration[player.current_marker])
+    console.log "Cela doit aller jusqua #{convert_to_milliseconde tab_duration[player.current_marker]}"
     sound.play()
   else
     soundManager.createSound({
@@ -68,7 +70,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
          console.log "Le son est chargé ! Etat => #{s.playState}"
          if s.playState == 0
            s.play({
-            position:  convert_to_milliseconde tab_duration[current_marker]
+            position:  convert_to_milliseconde tab_duration[player.current_marker]
             multiShotEvents: true
             onfinish : =>
              if (fichier_temp + 1) <= nb_fichier
@@ -80,10 +82,10 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
             })
            return
        whileplaying : =>
-         console.log s.position
-         if s.position > convert_to_milliseconde(tab_duration[current_marker + 1])
-           old_marker = current_marker
-           current_marker++
+         console.log " Position => #{s.position} / #{convert_to_milliseconde(tab_duration[player.current_marker + 1])} "
+         if s.position > convert_to_milliseconde(tab_duration[player.current_marker + 1])
+           old_marker = player.current_marker
+           player.current_marker++
            if (old_marker != 0 || fichier_temp !=1) || num_sourate == "1"
              player.next()
              console.log(s.position)
@@ -98,6 +100,7 @@ play_fichier = (url_fichier, id, fichier_temp, nb_fichier, num_sourate, recitate
        onplay : =>
          player.state = "play"
        onstop : =>
+         #current_marker
          player.state = "stop"
        onpause: =>
          player.state = "pause"
@@ -226,6 +229,7 @@ get_url_fichier = (numSourate, recitateur, numero_fichier) =>
   return surah
 
 player =
+  current_marker : null
   current_aya : $("#lstFromVersets").val()
   state : "stop"
   current_file_id : null
@@ -333,7 +337,6 @@ switch_classes = (type_switch, classes_aray) =>
 $(document).ready =>
 
 
-
   $('#lstSize').change((e) =>
    old_class =  switch_classes 'size',$(".verset_content").attr("class").split(" ")
    value_selected = $(e.currentTarget).val()
@@ -354,11 +357,14 @@ $(document).ready =>
       $(e.currentTarget).popover('hide')
   )
 
-  #$('.dropdown-toggle').dropdown()
-  #$(".test_popover").popover({ title: 'Français', content: 'C’est le Livre au sujet duquel il n’y a aucun doute, c’est un guide pour les pieux(2),' });
-  #$(".verset:first").popover('show')
   $("#surah_option_wrapper").on('submit','#lstSurahsFrm', (e) =>
 
+
+
+    player_icon = $(".pause-icon").first()
+    if player_icon.length == 1
+      player_icon.remove()
+      $(".play_border").first().append("<div class='play-icon'></div>")
     unless player.current_file_id == null
       son = soundManager.getSoundById player.current_file_id
       unless typeof son == 'undefined'
@@ -366,7 +372,6 @@ $(document).ready =>
         player.restart_loading
 
     lstSurahs = $("#lstSurahs").val()
-    #testrdqsdqs
 
     lstRecitators = $("#lstRecitators").val()
     lstFromVersets = $("#lstFromVersets").val()
@@ -450,8 +455,14 @@ $(document).ready =>
     if son_exist()
       player.stop()
       player_icon = $(".pause-icon").first()
-      player_icon.remove()
-      $(".play_border").first().append("<div class='play-icon'></div>")
+      if player_icon.length == 1
+       player_icon.remove()
+       $(".play_border").first().append("<div class='play-icon'></div>")
+      else
+       player_icon = $(".play-icon-resume").first()
+       if player_icon.length == 1
+        player_icon.remove()
+        $(".play_border").first().append("<div class='play-icon'></div>")
   )
 
   #Click sur resume

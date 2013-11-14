@@ -38,6 +38,7 @@ $(document).ready =>
         verset_content.parent().removeClass("open")
         $("#modal-verset").html(verset_content.text())
         $("#myModal").modal('show')
+
       return false
   )
 

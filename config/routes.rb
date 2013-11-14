@@ -11,6 +11,7 @@ Hafiz::Application.routes.draw do
   devise_for :users
   post '/users/:id/ayahs' , to: 'ayah_relationships#create'
   put '/users/:id/ayahs' , to: 'ayah_relationships#update'
+  delete '/relationships/:id' , to: 'ayah_relationships#destroy'
 
 
   # The priority is based upon order of creation:
